@@ -1,0 +1,1127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="762" failures="0" disabled="14" errors="0" timestamp="2014-03-12T01:01:22" time="6.773" name="AllTests">
+  <testsuite name="RandomDeathTest" tests="1" failures="0" disabled="0" errors="0" time="0.536">
+    <testcase name="GeneratesCrashesOnInvalidRange" status="run" time="0.536" classname="RandomDeathTest" />
+  </testsuite>
+  <testsuite name="ContainerUtilityDeathTest" tests="1" failures="0" disabled="0" errors="0" time="0.889">
+    <testcase name="ShuffleRange" status="run" time="0.889" classname="ContainerUtilityDeathTest" />
+  </testsuite>
+  <testsuite name="TestResultDeathTest" tests="1" failures="0" disabled="0" errors="0" time="0.445">
+    <testcase name="GetTestPartResult" status="run" time="0.445" classname="TestResultDeathTest" />
+  </testsuite>
+  <testsuite name="Int32FromEnvOrDieDeathTest" tests="2" failures="0" disabled="0" errors="0" time="0.005">
+    <testcase name="AbortsOnFailure" status="run" time="0.003" classname="Int32FromEnvOrDieDeathTest" />
+    <testcase name="AbortsOnInt32Overflow" status="run" time="0.002" classname="Int32FromEnvOrDieDeathTest" />
+  </testsuite>
+  <testsuite name="ShouldShardDeathTest" tests="1" failures="0" disabled="0" errors="0" time="0.011">
+    <testcase name="AbortsWhenShardingEnvVarsAreInvalid" status="run" time="0.011" classname="ShouldShardDeathTest" />
+  </testsuite>
+  <testsuite name="EventListenerDeathTest" tests="1" failures="0" disabled="0" errors="0" time="0.237">
+    <testcase name="EventsNotForwardedInDeathTestSubprecesses" status="run" time="0.237" classname="EventListenerDeathTest" />
+  </testsuite>
+  <testsuite name="TypedTestCasePStateDeathTest" tests="4" failures="0" disabled="0" errors="0" time="0.912">
+    <testcase name="DetectsDuplicates" status="run" time="0.216" classname="TypedTestCasePStateDeathTest" />
+    <testcase name="DetectsExtraTest" status="run" time="0.234" classname="TypedTestCasePStateDeathTest" />
+    <testcase name="DetectsMissedTest" status="run" time="0.244" classname="TypedTestCasePStateDeathTest" />
+    <testcase name="DetectsTestAfterRegistration" status="run" time="0.218" classname="TypedTestCasePStateDeathTest" />
+  </testsuite>
+  <testsuite name="TestPartResultArrayDeathTest" tests="1" failures="0" disabled="0" errors="0" time="0.475">
+    <testcase name="DiesWhenIndexIsOutOfBound" status="run" time="0.475" classname="TestPartResultArrayDeathTest" />
+  </testsuite>
+  <testsuite name="GtestCheckDeathTest" tests="2" failures="0" disabled="0" errors="0" time="0.214">
+    <testcase name="DiesWithCorrectOutputOnFailure" status="run" time="0.21" classname="GtestCheckDeathTest" />
+    <testcase name="LivesSilentlyOnSuccess" status="run" time="0.004" classname="GtestCheckDeathTest" />
+  </testsuite>
+  <testsuite name="CaptureDeathTest" tests="1" failures="0" disabled="0" errors="0" time="0.225">
+    <testcase name="CannotReenterStdoutCapture" status="run" time="0.225" classname="CaptureDeathTest" />
+  </testsuite>
+  <testsuite name="MutexDeathTest" tests="1" failures="0" disabled="0" errors="0" time="0.21">
+    <testcase name="AssertHeldShouldAssertWhenNotLocked" status="run" time="0.21" classname="MutexDeathTest" />
+  </testsuite>
+  <testsuite name="CommandLineFlagsTest" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="CanBeAccessedInCodeOnceGTestHIsIncluded" status="run" time="0" classname="CommandLineFlagsTest" />
+  </testsuite>
+  <testsuite name="GetRandomSeedFromFlagTest" tests="3" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="HandlesZero" status="run" time="0" classname="GetRandomSeedFromFlagTest" />
+    <testcase name="PreservesValidSeed" status="run" time="0" classname="GetRandomSeedFromFlagTest" />
+    <testcase name="NormalizesInvalidSeed" status="run" time="0" classname="GetRandomSeedFromFlagTest" />
+  </testsuite>
+  <testsuite name="GetNextRandomSeedTest" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="WorksForValidInput" status="run" time="0" classname="GetNextRandomSeedTest" />
+  </testsuite>
+  <testsuite name="GetTypeIdTest" tests="2" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="ReturnsSameValueForSameType" status="run" time="0" classname="GetTypeIdTest" />
+    <testcase name="ReturnsDifferentValuesForDifferentTypes" status="run" time="0" classname="GetTypeIdTest" />
+  </testsuite>
+  <testsuite name="GetTestTypeIdTest" tests="1" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="ReturnsTheSameValueInsideOrOutsideOfGoogleTest" status="run" time="0" classname="GetTestTypeIdTest" />
+  </testsuite>
+  <testsuite name="FormatTimeInMillisAsSecondsTest" tests="3" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="FormatsZero" status="run" time="0" classname="FormatTimeInMillisAsSecondsTest" />
+    <testcase name="FormatsPositiveNumber" status="run" time="0" classname="FormatTimeInMillisAsSecondsTest" />
+    <testcase name="FormatsNegativeNumber" status="run" time="0" classname="FormatTimeInMillisAsSecondsTest" />
+  </testsuite>
+  <testsuite name="FormatEpochTimeInMillisAsIso8601Test" tests="5" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="PrintsTwoDigitSegments" status="run" time="0" classname="FormatEpochTimeInMillisAsIso8601Test" />
+    <testcase name="MillisecondsDoNotAffectResult" status="run" time="0.001" classname="FormatEpochTimeInMillisAsIso8601Test" />
+    <testcase name="PrintsLeadingZeroes" status="run" time="0" classname="FormatEpochTimeInMillisAsIso8601Test" />
+    <testcase name="Prints24HourTime" status="run" time="0" classname="FormatEpochTimeInMillisAsIso8601Test" />
+    <testcase name="PrintsEpochStart" status="run" time="0" classname="FormatEpochTimeInMillisAsIso8601Test" />
+  </testsuite>
+  <testsuite name="NullLiteralTest" tests="2" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="IsTrueForNullLiterals" status="run" time="0" classname="NullLiteralTest" />
+    <testcase name="IsFalseForNonNullLiterals" status="run" time="0" classname="NullLiteralTest" />
+  </testsuite>
+  <testsuite name="CodePointToUtf8Test" tests="6" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="CanEncodeNul" status="run" time="0" classname="CodePointToUtf8Test" />
+    <testcase name="CanEncodeAscii" status="run" time="0" classname="CodePointToUtf8Test" />
+    <testcase name="CanEncode8To11Bits" status="run" time="0" classname="CodePointToUtf8Test" />
+    <testcase name="CanEncode12To16Bits" status="run" time="0" classname="CodePointToUtf8Test" />
+    <testcase name="CanEncode17To21Bits" status="run" time="0" classname="CodePointToUtf8Test" />
+    <testcase name="CanEncodeInvalidCodePoint" status="run" time="0" classname="CodePointToUtf8Test" />
+  </testsuite>
+  <testsuite name="WideStringToUtf8Test" tests="9" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="CanEncodeNul" status="run" time="0" classname="WideStringToUtf8Test" />
+    <testcase name="CanEncodeAscii" status="run" time="0" classname="WideStringToUtf8Test" />
+    <testcase name="CanEncode8To11Bits" status="run" time="0" classname="WideStringToUtf8Test" />
+    <testcase name="CanEncode12To16Bits" status="run" time="0" classname="WideStringToUtf8Test" />
+    <testcase name="StopsOnNulCharacter" status="run" time="0" classname="WideStringToUtf8Test" />
+    <testcase name="StopsWhenLengthLimitReached" status="run" time="0" classname="WideStringToUtf8Test" />
+    <testcase name="CanEncode17To21Bits" status="run" time="0" classname="WideStringToUtf8Test" />
+    <testcase name="CanEncodeInvalidCodePoint" status="run" time="0" classname="WideStringToUtf8Test" />
+    <testcase name="ConcatenatesCodepointsCorrectly" status="run" time="0" classname="WideStringToUtf8Test" />
+  </testsuite>
+  <testsuite name="RandomTest" tests="2" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="GeneratesNumbersWithinRange" status="run" time="0" classname="RandomTest" />
+    <testcase name="RepeatsWhenReseeded" status="run" time="0" classname="RandomTest" />
+  </testsuite>
+  <testsuite name="ContainerUtilityTest" tests="3" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="CountIf" status="run" time="0" classname="ContainerUtilityTest" />
+    <testcase name="ForEach" status="run" time="0" classname="ContainerUtilityTest" />
+    <testcase name="GetElementOr" status="run" time="0" classname="ContainerUtilityTest" />
+  </testsuite>
+  <testsuite name="VectorShuffleTest" tests="7" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="HandlesEmptyRange" status="run" time="0" classname="VectorShuffleTest" />
+    <testcase name="HandlesRangeOfSizeOne" status="run" time="0" classname="VectorShuffleTest" />
+    <testcase name="ShufflesEntireVector" status="run" time="0" classname="VectorShuffleTest" />
+    <testcase name="ShufflesStartOfVector" status="run" time="0" classname="VectorShuffleTest" />
+    <testcase name="ShufflesEndOfVector" status="run" time="0" classname="VectorShuffleTest" />
+    <testcase name="ShufflesMiddleOfVector" status="run" time="0" classname="VectorShuffleTest" />
+    <testcase name="ShufflesRepeatably" status="run" time="0" classname="VectorShuffleTest" />
+  </testsuite>
+  <testsuite name="AssertHelperTest" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="AssertHelperIsSmall" status="run" time="0" classname="AssertHelperTest" />
+  </testsuite>
+  <testsuite name="StringTest" tests="2" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="EndsWithCaseInsensitive" status="run" time="0" classname="StringTest" />
+    <testcase name="CaseInsensitiveWideCStringEquals" status="run" time="0" classname="StringTest" />
+  </testsuite>
+  <testsuite name="TestPropertyTest" tests="4" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="StringValue" status="run" time="0" classname="TestPropertyTest" />
+    <testcase name="ReplaceStringValue" status="run" time="0" classname="TestPropertyTest" />
+    <testcase name="ConstructorWorks" status="run" time="0" classname="TestPropertyTest" />
+    <testcase name="SetValue" status="run" time="0" classname="TestPropertyTest" />
+  </testsuite>
+  <testsuite name="ScopedFakeTestPartResultReporterTest" tests="2" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="InterceptsTestFailures" status="run" time="0" classname="ScopedFakeTestPartResultReporterTest" />
+    <testcase name="DeprecatedConstructor" status="run" time="0" classname="ScopedFakeTestPartResultReporterTest" />
+  </testsuite>
+  <testsuite name="ScopedFakeTestPartResultReporterWithThreadsTest" tests="1" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="InterceptsTestFailuresInAllThreads" status="run" time="0.001" classname="ScopedFakeTestPartResultReporterWithThreadsTest" />
+  </testsuite>
+  <testsuite name="ExpectFatalFailureTest" tests="6" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="CatchesFatalFaliure" status="run" time="0" classname="ExpectFatalFailureTest" />
+    <testcase name="AcceptsStdStringObject" status="run" time="0" classname="ExpectFatalFailureTest" />
+    <testcase name="CatchesFatalFailureOnAllThreads" status="run" time="0" classname="ExpectFatalFailureTest" />
+    <testcase name="CanBeUsedInNonVoidFunction" status="run" time="0" classname="ExpectFatalFailureTest" />
+    <testcase name="DoesNotAbort" status="run" time="0" classname="ExpectFatalFailureTest" />
+    <testcase name="AcceptsMacroThatExpandsToUnprotectedComma" status="run" time="0" classname="ExpectFatalFailureTest" />
+  </testsuite>
+  <testsuite name="ExpectNonfatalFailureTest" tests="4" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="CatchesNonfatalFailure" status="run" time="0" classname="ExpectNonfatalFailureTest" />
+    <testcase name="AcceptsStdStringObject" status="run" time="0" classname="ExpectNonfatalFailureTest" />
+    <testcase name="CatchesNonfatalFailureOnAllThreads" status="run" time="0" classname="ExpectNonfatalFailureTest" />
+    <testcase name="AcceptsMacroThatExpandsToUnprotectedComma" status="run" time="0" classname="ExpectNonfatalFailureTest" />
+  </testsuite>
+  <testsuite name="ExpectFailureWithThreadsTest" tests="2" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="ExpectFatalFailureOnAllThreads" status="run" time="0" classname="ExpectFailureWithThreadsTest" />
+    <testcase name="ExpectNonFatalFailureOnAllThreads" status="run" time="0" classname="ExpectFailureWithThreadsTest" />
+  </testsuite>
+  <testsuite name="TestResultTest" tests="3" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="total_part_count" status="run" time="0" classname="TestResultTest" />
+    <testcase name="Passed" status="run" time="0" classname="TestResultTest" />
+    <testcase name="Failed" status="run" time="0" classname="TestResultTest" />
+  </testsuite>
+  <testsuite name="TestResultPropertyTest" tests="5" failures="0" disabled="0" errors="0" time="0.464">
+    <testcase name="NoPropertiesFoundWhenNoneAreAdded" status="run" time="0" classname="TestResultPropertyTest" />
+    <testcase name="OnePropertyFoundWhenAdded" status="run" time="0" classname="TestResultPropertyTest" />
+    <testcase name="MultiplePropertiesFoundWhenAdded" status="run" time="0" classname="TestResultPropertyTest" />
+    <testcase name="OverridesValuesForDuplicateKeys" status="run" time="0" classname="TestResultPropertyTest" />
+    <testcase name="GetTestProperty" status="run" time="0.464" classname="TestResultPropertyTest" />
+  </testsuite>
+  <testsuite name="GTestFlagSaverTest" tests="2" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="ModifyGTestFlags" status="run" time="0" classname="GTestFlagSaverTest" />
+    <testcase name="VerifyGTestFlags" status="run" time="0" classname="GTestFlagSaverTest" />
+  </testsuite>
+  <testsuite name="Int32FromGTestEnvTest" tests="4" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="ReturnsDefaultWhenVariableIsNotSet" status="run" time="0" classname="Int32FromGTestEnvTest" />
+    <testcase name="ReturnsDefaultWhenValueOverflows" status="run" time="0" classname="Int32FromGTestEnvTest" />
+    <testcase name="ReturnsDefaultWhenValueIsInvalid" status="run" time="0" classname="Int32FromGTestEnvTest" />
+    <testcase name="ParsesAndReturnsValidValue" status="run" time="0" classname="Int32FromGTestEnvTest" />
+  </testsuite>
+  <testsuite name="ParseInt32FlagTest" tests="4" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="ReturnsFalseForInvalidFlag" status="run" time="0" classname="ParseInt32FlagTest" />
+    <testcase name="ReturnsDefaultWhenValueOverflows" status="run" time="0" classname="ParseInt32FlagTest" />
+    <testcase name="ReturnsDefaultWhenValueIsInvalid" status="run" time="0" classname="ParseInt32FlagTest" />
+    <testcase name="ParsesAndReturnsValidValue" status="run" time="0" classname="ParseInt32FlagTest" />
+  </testsuite>
+  <testsuite name="Int32FromEnvOrDieTest" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="ParsesAndReturnsValidValue" status="run" time="0" classname="Int32FromEnvOrDieTest" />
+  </testsuite>
+  <testsuite name="ShouldRunTestOnShardTest" tests="2" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="IsPartitionWhenThereIsOneShard" status="run" time="0" classname="ShouldRunTestOnShardTest" />
+    <testcase name="IsPartitionWhenThereAreFiveShards" status="run" time="0" classname="ShouldRunTestOnShardTest" />
+  </testsuite>
+  <testsuite name="ShouldShardTest" tests="3" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="ReturnsFalseWhenNeitherEnvVarIsSet" status="run" time="0" classname="ShouldShardTest" />
+    <testcase name="ReturnsFalseWhenTotalShardIsOne" status="run" time="0" classname="ShouldShardTest" />
+    <testcase name="WorksWhenShardEnvVarsAreValid" status="run" time="0" classname="ShouldShardTest" />
+  </testsuite>
+  <testsuite name="UnitTestTest" tests="2" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="CanGetOriginalWorkingDir" status="run" time="0" classname="UnitTestTest" />
+    <testcase name="ReturnsPlausibleTimestamp" status="run" time="0" classname="UnitTestTest" />
+  </testsuite>
+  <testsuite name="UnitTestRecordPropertyTest" tests="5" failures="0" disabled="0" errors="0" time="0" test_case_key_1="1">
+    <testcase name="OnePropertyFoundWhenAdded" status="run" time="0" classname="UnitTestRecordPropertyTest" />
+    <testcase name="MultiplePropertiesFoundWhenAdded" status="run" time="0" classname="UnitTestRecordPropertyTest" />
+    <testcase name="OverridesValuesForDuplicateKeys" status="run" time="0" classname="UnitTestRecordPropertyTest" />
+    <testcase name="AddFailureInsideTestsWhenUsingTestCaseReservedKeys" status="run" time="0" classname="UnitTestRecordPropertyTest" />
+    <testcase name="AddRecordWithReservedKeysGeneratesCorrectPropertyList" status="run" time="0" classname="UnitTestRecordPropertyTest" />
+  </testsuite>
+  <testsuite name="Pred1Test" tests="3" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="WithoutFormat" status="run" time="0" classname="Pred1Test" />
+    <testcase name="WithFormat" status="run" time="0" classname="Pred1Test" />
+    <testcase name="SingleEvaluationOnFailure" status="run" time="0" classname="Pred1Test" />
+  </testsuite>
+  <testsuite name="PredTest" tests="3" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="WithoutFormat" status="run" time="0" classname="PredTest" />
+    <testcase name="WithFormat" status="run" time="0" classname="PredTest" />
+    <testcase name="SingleEvaluationOnFailure" status="run" time="0" classname="PredTest" />
+  </testsuite>
+  <testsuite name="PredicateAssertionTest" tests="2" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="AcceptsOverloadedFunction" status="run" time="0" classname="PredicateAssertionTest" />
+    <testcase name="AcceptsTemplateFunction" status="run" time="0" classname="PredicateAssertionTest" />
+  </testsuite>
+  <testsuite name="PredicateFormatAssertionTest" tests="2" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="AcceptsOverloadedFunction" status="run" time="0" classname="PredicateFormatAssertionTest" />
+    <testcase name="AcceptsTemplateFunction" status="run" time="0" classname="PredicateFormatAssertionTest" />
+  </testsuite>
+  <testsuite name="StringAssertionTest" tests="8" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="ASSERT_STREQ" status="run" time="0" classname="StringAssertionTest" />
+    <testcase name="ASSERT_STREQ_Null" status="run" time="0" classname="StringAssertionTest" />
+    <testcase name="ASSERT_STREQ_Null2" status="run" time="0" classname="StringAssertionTest" />
+    <testcase name="ASSERT_STRNE" status="run" time="0" classname="StringAssertionTest" />
+    <testcase name="ASSERT_STRCASEEQ" status="run" time="0" classname="StringAssertionTest" />
+    <testcase name="ASSERT_STRCASENE" status="run" time="0" classname="StringAssertionTest" />
+    <testcase name="STREQ_Wide" status="run" time="0" classname="StringAssertionTest" />
+    <testcase name="STRNE_Wide" status="run" time="0" classname="StringAssertionTest" />
+  </testsuite>
+  <testsuite name="IsSubstringTest" tests="6" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="ReturnsCorrectResultForCString" status="run" time="0" classname="IsSubstringTest" />
+    <testcase name="ReturnsCorrectResultForWideCString" status="run" time="0.001" classname="IsSubstringTest" />
+    <testcase name="GeneratesCorrectMessageForCString" status="run" time="0" classname="IsSubstringTest" />
+    <testcase name="ReturnsCorrectResultsForStdString" status="run" time="0" classname="IsSubstringTest" />
+    <testcase name="ReturnsCorrectResultForStdWstring" status="run" time="0" classname="IsSubstringTest" />
+    <testcase name="GeneratesCorrectMessageForWstring" status="run" time="0" classname="IsSubstringTest" />
+  </testsuite>
+  <testsuite name="IsNotSubstringTest" tests="6" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="ReturnsCorrectResultForCString" status="run" time="0" classname="IsNotSubstringTest" />
+    <testcase name="ReturnsCorrectResultForWideCString" status="run" time="0" classname="IsNotSubstringTest" />
+    <testcase name="GeneratesCorrectMessageForWideCString" status="run" time="0" classname="IsNotSubstringTest" />
+    <testcase name="ReturnsCorrectResultsForStdString" status="run" time="0" classname="IsNotSubstringTest" />
+    <testcase name="GeneratesCorrectMessageForStdString" status="run" time="0" classname="IsNotSubstringTest" />
+    <testcase name="ReturnsCorrectResultForStdWstring" status="run" time="0" classname="IsNotSubstringTest" />
+  </testsuite>
+  <testsuite name="FloatTest" tests="13" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="Size" status="run" time="0" classname="FloatTest" />
+    <testcase name="Zeros" status="run" time="0" classname="FloatTest" />
+    <testcase name="AlmostZeros" status="run" time="0" classname="FloatTest" />
+    <testcase name="SmallDiff" status="run" time="0" classname="FloatTest" />
+    <testcase name="LargeDiff" status="run" time="0.001" classname="FloatTest" />
+    <testcase name="Infinity" status="run" time="0" classname="FloatTest" />
+    <testcase name="NaN" status="run" time="0" classname="FloatTest" />
+    <testcase name="Reflexive" status="run" time="0" classname="FloatTest" />
+    <testcase name="Commutative" status="run" time="0" classname="FloatTest" />
+    <testcase name="EXPECT_NEAR" status="run" time="0" classname="FloatTest" />
+    <testcase name="ASSERT_NEAR" status="run" time="0" classname="FloatTest" />
+    <testcase name="FloatLESucceeds" status="run" time="0" classname="FloatTest" />
+    <testcase name="FloatLEFails" status="run" time="0" classname="FloatTest" />
+  </testsuite>
+  <testsuite name="DoubleTest" tests="13" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="Size" status="run" time="0" classname="DoubleTest" />
+    <testcase name="Zeros" status="run" time="0" classname="DoubleTest" />
+    <testcase name="AlmostZeros" status="run" time="0" classname="DoubleTest" />
+    <testcase name="SmallDiff" status="run" time="0.001" classname="DoubleTest" />
+    <testcase name="LargeDiff" status="run" time="0" classname="DoubleTest" />
+    <testcase name="Infinity" status="run" time="0" classname="DoubleTest" />
+    <testcase name="NaN" status="run" time="0" classname="DoubleTest" />
+    <testcase name="Reflexive" status="run" time="0" classname="DoubleTest" />
+    <testcase name="Commutative" status="run" time="0" classname="DoubleTest" />
+    <testcase name="EXPECT_NEAR" status="run" time="0" classname="DoubleTest" />
+    <testcase name="ASSERT_NEAR" status="run" time="0" classname="DoubleTest" />
+    <testcase name="DoubleLESucceeds" status="run" time="0" classname="DoubleTest" />
+    <testcase name="DoubleLEFails" status="run" time="0" classname="DoubleTest" />
+  </testsuite>
+  <testsuite name="DisabledTest" tests="2" failures="0" disabled="1" errors="0" time="0">
+    <testcase name="DISABLED_TestShouldNotRun" status="notrun" time="0" classname="DisabledTest" />
+    <testcase name="NotDISABLED_TestShouldRun" status="run" time="0" classname="DisabledTest" />
+  </testsuite>
+  <testsuite name="DISABLED_TestCase" tests="2" failures="0" disabled="2" errors="0" time="0">
+    <testcase name="TestShouldNotRun" status="notrun" time="0" classname="DISABLED_TestCase" />
+    <testcase name="DISABLED_TestShouldNotRun" status="notrun" time="0" classname="DISABLED_TestCase" />
+  </testsuite>
+  <testsuite name="DisabledTestsTest" tests="2" failures="0" disabled="2" errors="0" time="0">
+    <testcase name="DISABLED_TestShouldNotRun_1" status="notrun" time="0" classname="DisabledTestsTest" />
+    <testcase name="DISABLED_TestShouldNotRun_2" status="notrun" time="0" classname="DisabledTestsTest" />
+  </testsuite>
+  <testsuite name="TypedTest/0" tests="1" failures="0" disabled="1" errors="0" time="0">
+    <testcase name="DISABLED_ShouldNotRun" type_param="int" status="notrun" time="0" classname="TypedTest/0" />
+  </testsuite>
+  <testsuite name="TypedTest/1" tests="1" failures="0" disabled="1" errors="0" time="0">
+    <testcase name="DISABLED_ShouldNotRun" type_param="double" status="notrun" time="0" classname="TypedTest/1" />
+  </testsuite>
+  <testsuite name="DISABLED_TypedTest/0" tests="1" failures="0" disabled="1" errors="0" time="0">
+    <testcase name="ShouldNotRun" type_param="int" status="notrun" time="0" classname="DISABLED_TypedTest/0" />
+  </testsuite>
+  <testsuite name="DISABLED_TypedTest/1" tests="1" failures="0" disabled="1" errors="0" time="0">
+    <testcase name="ShouldNotRun" type_param="double" status="notrun" time="0" classname="DISABLED_TypedTest/1" />
+  </testsuite>
+  <testsuite name="My/TypedTestP/0" tests="1" failures="0" disabled="1" errors="0" time="0">
+    <testcase name="DISABLED_ShouldNotRun" type_param="int" status="notrun" time="0" classname="My/TypedTestP/0" />
+  </testsuite>
+  <testsuite name="My/TypedTestP/1" tests="1" failures="0" disabled="1" errors="0" time="0">
+    <testcase name="DISABLED_ShouldNotRun" type_param="double" status="notrun" time="0" classname="My/TypedTestP/1" />
+  </testsuite>
+  <testsuite name="My/DISABLED_TypedTestP/0" tests="1" failures="0" disabled="1" errors="0" time="0">
+    <testcase name="ShouldNotRun" type_param="int" status="notrun" time="0" classname="My/DISABLED_TypedTestP/0" />
+  </testsuite>
+  <testsuite name="My/DISABLED_TypedTestP/1" tests="1" failures="0" disabled="1" errors="0" time="0">
+    <testcase name="ShouldNotRun" type_param="double" status="notrun" time="0" classname="My/DISABLED_TypedTestP/1" />
+  </testsuite>
+  <testsuite name="SingleEvaluationTest" tests="5" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="FailedASSERT_STREQ" status="run" time="0" classname="SingleEvaluationTest" />
+    <testcase name="ASSERT_STR" status="run" time="0" classname="SingleEvaluationTest" />
+    <testcase name="FailedASSERT_NE" status="run" time="0" classname="SingleEvaluationTest" />
+    <testcase name="OtherCases" status="run" time="0.001" classname="SingleEvaluationTest" />
+    <testcase name="ExceptionTests" status="run" time="0" classname="SingleEvaluationTest" />
+  </testsuite>
+  <testsuite name="NoFatalFailureTest" tests="5" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="NoFailure" status="run" time="0" classname="NoFatalFailureTest" />
+    <testcase name="NonFatalIsNoFailure" status="run" time="0" classname="NoFatalFailureTest" />
+    <testcase name="AssertNoFatalFailureOnFatalFailure" status="run" time="0" classname="NoFatalFailureTest" />
+    <testcase name="ExpectNoFatalFailureOnFatalFailure" status="run" time="0" classname="NoFatalFailureTest" />
+    <testcase name="MessageIsStreamable" status="run" time="0" classname="NoFatalFailureTest" />
+  </testsuite>
+  <testsuite name="AssertionTest" tests="21" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="EqFailure" status="run" time="0" classname="AssertionTest" />
+    <testcase name="AppendUserMessage" status="run" time="0" classname="AssertionTest" />
+    <testcase name="ASSERT_TRUE" status="run" time="0" classname="AssertionTest" />
+    <testcase name="AssertTrueWithAssertionResult" status="run" time="0" classname="AssertionTest" />
+    <testcase name="ASSERT_FALSE" status="run" time="0" classname="AssertionTest" />
+    <testcase name="AssertFalseWithAssertionResult" status="run" time="0" classname="AssertionTest" />
+    <testcase name="ASSERT_EQ" status="run" time="0" classname="AssertionTest" />
+    <testcase name="ASSERT_EQ_NULL" status="run" time="0" classname="AssertionTest" />
+    <testcase name="ASSERT_NE" status="run" time="0" classname="AssertionTest" />
+    <testcase name="ASSERT_LE" status="run" time="0" classname="AssertionTest" />
+    <testcase name="ASSERT_LT" status="run" time="0" classname="AssertionTest" />
+    <testcase name="ASSERT_GE" status="run" time="0" classname="AssertionTest" />
+    <testcase name="ASSERT_GT" status="run" time="0" classname="AssertionTest" />
+    <testcase name="ASSERT_THROW" status="run" time="0" classname="AssertionTest" />
+    <testcase name="ASSERT_NO_THROW" status="run" time="0" classname="AssertionTest" />
+    <testcase name="ASSERT_ANY_THROW" status="run" time="0" classname="AssertionTest" />
+    <testcase name="AssertPrecedence" status="run" time="0" classname="AssertionTest" />
+    <testcase name="NonFixtureSubroutine" status="run" time="0" classname="AssertionTest" />
+    <testcase name="AssertWorksWithUncopyableObject" status="run" time="0" classname="AssertionTest" />
+    <testcase name="ExpectWorksWithUncopyableObject" status="run" time="0" classname="AssertionTest" />
+    <testcase name="NamedEnum" status="run" time="0" classname="AssertionTest" />
+  </testsuite>
+  <testsuite name="ExpectTest" tests="19" failures="0" disabled="0" errors="0" time="0.002">
+    <testcase name="ASSERT_EQ_Double" status="run" time="0" classname="ExpectTest" />
+    <testcase name="ASSERT_EQ_0" status="run" time="0" classname="ExpectTest" />
+    <testcase name="EXPECT_TRUE" status="run" time="0" classname="ExpectTest" />
+    <testcase name="ExpectTrueWithAssertionResult" status="run" time="0" classname="ExpectTest" />
+    <testcase name="EXPECT_FALSE" status="run" time="0.001" classname="ExpectTest" />
+    <testcase name="ExpectFalseWithAssertionResult" status="run" time="0" classname="ExpectTest" />
+    <testcase name="EXPECT_EQ" status="run" time="0" classname="ExpectTest" />
+    <testcase name="EXPECT_EQ_Double" status="run" time="0" classname="ExpectTest" />
+    <testcase name="EXPECT_EQ_NULL" status="run" time="0" classname="ExpectTest" />
+    <testcase name="EXPECT_EQ_0" status="run" time="0" classname="ExpectTest" />
+    <testcase name="EXPECT_NE" status="run" time="0" classname="ExpectTest" />
+    <testcase name="EXPECT_LE" status="run" time="0" classname="ExpectTest" />
+    <testcase name="EXPECT_LT" status="run" time="0" classname="ExpectTest" />
+    <testcase name="EXPECT_GE" status="run" time="0" classname="ExpectTest" />
+    <testcase name="EXPECT_GT" status="run" time="0" classname="ExpectTest" />
+    <testcase name="EXPECT_THROW" status="run" time="0" classname="ExpectTest" />
+    <testcase name="EXPECT_NO_THROW" status="run" time="0.001" classname="ExpectTest" />
+    <testcase name="EXPECT_ANY_THROW" status="run" time="0" classname="ExpectTest" />
+    <testcase name="ExpectPrecedence" status="run" time="0" classname="ExpectTest" />
+  </testsuite>
+  <testsuite name="AssertionSyntaxTest" tests="5" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="BasicAssertionsBehavesLikeSingleStatement" status="run" time="0" classname="AssertionSyntaxTest" />
+    <testcase name="ExceptionAssertionsBehavesLikeSingleStatement" status="run" time="0" classname="AssertionSyntaxTest" />
+    <testcase name="NoFatalFailureAssertionsBehavesLikeSingleStatement" status="run" time="0" classname="AssertionSyntaxTest" />
+    <testcase name="WorksWithSwitch" status="run" time="0" classname="AssertionSyntaxTest" />
+    <testcase name="WorksWithConst" status="run" time="0" classname="AssertionSyntaxTest" />
+  </testsuite>
+  <testsuite name="ExpectThrowTest" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="DoesNotGenerateUnreachableCodeWarning" status="run" time="0" classname="ExpectThrowTest" />
+  </testsuite>
+  <testsuite name="SuccessfulAssertionTest" tests="5" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="SUCCEED" status="run" time="0" classname="SuccessfulAssertionTest" />
+    <testcase name="EXPECT" status="run" time="0" classname="SuccessfulAssertionTest" />
+    <testcase name="EXPECT_STR" status="run" time="0" classname="SuccessfulAssertionTest" />
+    <testcase name="ASSERT" status="run" time="0" classname="SuccessfulAssertionTest" />
+    <testcase name="ASSERT_STR" status="run" time="0" classname="SuccessfulAssertionTest" />
+  </testsuite>
+  <testsuite name="AssertionWithMessageTest" tests="8" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="EXPECT" status="run" time="0" classname="AssertionWithMessageTest" />
+    <testcase name="ASSERT" status="run" time="0" classname="AssertionWithMessageTest" />
+    <testcase name="ASSERT_STR" status="run" time="0" classname="AssertionWithMessageTest" />
+    <testcase name="ASSERT_FLOATING" status="run" time="0" classname="AssertionWithMessageTest" />
+    <testcase name="ASSERT_FALSE" status="run" time="0" classname="AssertionWithMessageTest" />
+    <testcase name="FAIL" status="run" time="0" classname="AssertionWithMessageTest" />
+    <testcase name="SUCCEED" status="run" time="0" classname="AssertionWithMessageTest" />
+    <testcase name="ASSERT_TRUE" status="run" time="0.001" classname="AssertionWithMessageTest" />
+  </testsuite>
+  <testsuite name="StreamableToStringTest" tests="5" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="Scalar" status="run" time="0" classname="StreamableToStringTest" />
+    <testcase name="Pointer" status="run" time="0" classname="StreamableToStringTest" />
+    <testcase name="NullPointer" status="run" time="0" classname="StreamableToStringTest" />
+    <testcase name="CString" status="run" time="0" classname="StreamableToStringTest" />
+    <testcase name="NullCString" status="run" time="0" classname="StreamableToStringTest" />
+  </testsuite>
+  <testsuite name="StreamableTest" tests="6" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="string" status="run" time="0" classname="StreamableTest" />
+    <testcase name="stringWithEmbeddedNUL" status="run" time="0" classname="StreamableTest" />
+    <testcase name="NULChar" status="run" time="0" classname="StreamableTest" />
+    <testcase name="int" status="run" time="0" classname="StreamableTest" />
+    <testcase name="NullCharPtr" status="run" time="0" classname="StreamableTest" />
+    <testcase name="BasicIoManip" status="run" time="0" classname="StreamableTest" />
+  </testsuite>
+  <testsuite name="MacroTest" tests="4" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="ADD_FAILURE" status="run" time="0" classname="MacroTest" />
+    <testcase name="ADD_FAILURE_AT" status="run" time="0" classname="MacroTest" />
+    <testcase name="FAIL" status="run" time="0" classname="MacroTest" />
+    <testcase name="SUCCEED" status="run" time="0" classname="MacroTest" />
+  </testsuite>
+  <testsuite name="EqAssertionTest" tests="10" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="Bool" status="run" time="0" classname="EqAssertionTest" />
+    <testcase name="Int" status="run" time="0" classname="EqAssertionTest" />
+    <testcase name="Time_T" status="run" time="0" classname="EqAssertionTest" />
+    <testcase name="Char" status="run" time="0" classname="EqAssertionTest" />
+    <testcase name="WideChar" status="run" time="0" classname="EqAssertionTest" />
+    <testcase name="StdString" status="run" time="0.001" classname="EqAssertionTest" />
+    <testcase name="StdWideString" status="run" time="0" classname="EqAssertionTest" />
+    <testcase name="CharPointer" status="run" time="0" classname="EqAssertionTest" />
+    <testcase name="WideCharPointer" status="run" time="0" classname="EqAssertionTest" />
+    <testcase name="OtherPointer" status="run" time="0" classname="EqAssertionTest" />
+  </testsuite>
+  <testsuite name="ComparisonAssertionTest" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="AcceptsUnprintableArgs" status="run" time="0" classname="ComparisonAssertionTest" />
+  </testsuite>
+  <testsuite name="FRIEND_TEST_Test" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="TEST" status="run" time="0" classname="FRIEND_TEST_Test" />
+  </testsuite>
+  <testsuite name="FRIEND_TEST_Test2" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="TEST_F" status="run" time="0" classname="FRIEND_TEST_Test2" />
+  </testsuite>
+  <testsuite name="TestLifeCycleTest" tests="2" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="Test1" status="run" time="0.001" classname="TestLifeCycleTest" />
+    <testcase name="Test2" status="run" time="0" classname="TestLifeCycleTest" />
+  </testsuite>
+  <testsuite name="AssertionResultTest" tests="5" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="CopyConstructorWorksWhenNotOptimied" status="run" time="0" classname="AssertionResultTest" />
+    <testcase name="ConstructionWorks" status="run" time="0" classname="AssertionResultTest" />
+    <testcase name="NegationWorks" status="run" time="0" classname="AssertionResultTest" />
+    <testcase name="StreamingWorks" status="run" time="0" classname="AssertionResultTest" />
+    <testcase name="CanStreamOstreamManipulators" status="run" time="0" classname="AssertionResultTest" />
+  </testsuite>
+  <testsuite name="MessageTest" tests="23" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="CanStreamUserTypeInGlobalNameSpace" status="run" time="0" classname="MessageTest" />
+    <testcase name="CanStreamUserTypeInUnnamedNameSpace" status="run" time="0" classname="MessageTest" />
+    <testcase name="CanStreamUserTypeInUserNameSpace" status="run" time="0" classname="MessageTest" />
+    <testcase name="CanStreamUserTypeInUserNameSpaceWithStreamOperatorInGlobal" status="run" time="0" classname="MessageTest" />
+    <testcase name="NullPointers" status="run" time="0" classname="MessageTest" />
+    <testcase name="WideStrings" status="run" time="0" classname="MessageTest" />
+    <testcase name="DefaultConstructor" status="run" time="0" classname="MessageTest" />
+    <testcase name="CopyConstructor" status="run" time="0" classname="MessageTest" />
+    <testcase name="ConstructsFromCString" status="run" time="0" classname="MessageTest" />
+    <testcase name="StreamsFloat" status="run" time="0" classname="MessageTest" />
+    <testcase name="StreamsDouble" status="run" time="0" classname="MessageTest" />
+    <testcase name="StreamsPointer" status="run" time="0" classname="MessageTest" />
+    <testcase name="StreamsNullPointer" status="run" time="0" classname="MessageTest" />
+    <testcase name="StreamsCString" status="run" time="0" classname="MessageTest" />
+    <testcase name="StreamsNullCString" status="run" time="0" classname="MessageTest" />
+    <testcase name="StreamsString" status="run" time="0" classname="MessageTest" />
+    <testcase name="StreamsStringWithEmbeddedNUL" status="run" time="0" classname="MessageTest" />
+    <testcase name="StreamsNULChar" status="run" time="0" classname="MessageTest" />
+    <testcase name="StreamsInt" status="run" time="0" classname="MessageTest" />
+    <testcase name="StreamsBasicIoManip" status="run" time="0" classname="MessageTest" />
+    <testcase name="GetString" status="run" time="0" classname="MessageTest" />
+    <testcase name="StreamsToOStream" status="run" time="0" classname="MessageTest" />
+    <testcase name="DoesNotTakeUpMuchStackSpace" status="run" time="0" classname="MessageTest" />
+  </testsuite>
+  <testsuite name="TestInfoTest" tests="2" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="Names" status="run" time="0" classname="TestInfoTest" />
+    <testcase name="result" status="run" time="0" classname="TestInfoTest" />
+  </testsuite>
+  <testsuite name="SetUpTestCaseTest" tests="2" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="Test1" status="run" time="0" classname="SetUpTestCaseTest" />
+    <testcase name="Test2" status="run" time="0" classname="SetUpTestCaseTest" />
+  </testsuite>
+  <testsuite name="InitGoogleTestTest" tests="41" failures="0" disabled="0" errors="0" time="0.007">
+    <testcase name="Empty" status="run" time="0" classname="InitGoogleTestTest" />
+    <testcase name="NoFlag" status="run" time="0" classname="InitGoogleTestTest" />
+    <testcase name="FilterBad" status="run" time="0.001" classname="InitGoogleTestTest" />
+    <testcase name="FilterEmpty" status="run" time="0" classname="InitGoogleTestTest" />
+    <testcase name="FilterNonEmpty" status="run" time="0.001" classname="InitGoogleTestTest" />
+    <testcase name="BreakOnFailureWithoutValue" status="run" time="0" classname="InitGoogleTestTest" />
+    <testcase name="BreakOnFailureFalse_0" status="run" time="0" classname="InitGoogleTestTest" />
+    <testcase name="BreakOnFailureFalse_f" status="run" time="0" classname="InitGoogleTestTest" />
+    <testcase name="BreakOnFailureFalse_F" status="run" time="0" classname="InitGoogleTestTest" />
+    <testcase name="BreakOnFailureTrue" status="run" time="0" classname="InitGoogleTestTest" />
+    <testcase name="CatchExceptions" status="run" time="0.001" classname="InitGoogleTestTest" />
+    <testcase name="DeathTestUseFork" status="run" time="0" classname="InitGoogleTestTest" />
+    <testcase name="DuplicatedFlags" status="run" time="0" classname="InitGoogleTestTest" />
+    <testcase name="UnrecognizedFlag" status="run" time="0" classname="InitGoogleTestTest" />
+    <testcase name="ListTestsFlag" status="run" time="0" classname="InitGoogleTestTest" />
+    <testcase name="ListTestsTrue" status="run" time="0" classname="InitGoogleTestTest" />
+    <testcase name="ListTestsFalse" status="run" time="0" classname="InitGoogleTestTest" />
+    <testcase name="ListTestsFalse_f" status="run" time="0" classname="InitGoogleTestTest" />
+    <testcase name="ListTestsFalse_F" status="run" time="0.001" classname="InitGoogleTestTest" />
+    <testcase name="OutputEmpty" status="run" time="0" classname="InitGoogleTestTest" />
+    <testcase name="OutputXml" status="run" time="0" classname="InitGoogleTestTest" />
+    <testcase name="OutputXmlFile" status="run" time="0.001" classname="InitGoogleTestTest" />
+    <testcase name="OutputXmlDirectory" status="run" time="0" classname="InitGoogleTestTest" />
+    <testcase name="PrintTimeFlag" status="run" time="0" classname="InitGoogleTestTest" />
+    <testcase name="PrintTimeTrue" status="run" time="0" classname="InitGoogleTestTest" />
+    <testcase name="PrintTimeFalse" status="run" time="0" classname="InitGoogleTestTest" />
+    <testcase name="PrintTimeFalse_f" status="run" time="0" classname="InitGoogleTestTest" />
+    <testcase name="PrintTimeFalse_F" status="run" time="0" classname="InitGoogleTestTest" />
+    <testcase name="RandomSeed" status="run" time="0" classname="InitGoogleTestTest" />
+    <testcase name="Repeat" status="run" time="0" classname="InitGoogleTestTest" />
+    <testcase name="AlsoRunDisabledTestsFlag" status="run" time="0.001" classname="InitGoogleTestTest" />
+    <testcase name="AlsoRunDisabledTestsTrue" status="run" time="0" classname="InitGoogleTestTest" />
+    <testcase name="AlsoRunDisabledTestsFalse" status="run" time="0" classname="InitGoogleTestTest" />
+    <testcase name="ShuffleWithoutValue" status="run" time="0" classname="InitGoogleTestTest" />
+    <testcase name="ShuffleFalse_0" status="run" time="0" classname="InitGoogleTestTest" />
+    <testcase name="ShuffleTrue" status="run" time="0" classname="InitGoogleTestTest" />
+    <testcase name="StackTraceDepth" status="run" time="0" classname="InitGoogleTestTest" />
+    <testcase name="StreamResultTo" status="run" time="0" classname="InitGoogleTestTest" />
+    <testcase name="ThrowOnFailureWithoutValue" status="run" time="0.001" classname="InitGoogleTestTest" />
+    <testcase name="ThrowOnFailureFalse_0" status="run" time="0" classname="InitGoogleTestTest" />
+    <testcase name="ThrowOnFailureTrue" status="run" time="0" classname="InitGoogleTestTest" />
+  </testsuite>
+  <testsuite name="CurrentTestInfoTest" tests="2" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="WorksForFirstTestInATestCase" status="run" time="0" classname="CurrentTestInfoTest" />
+    <testcase name="WorksForSecondTestInATestCase" status="run" time="0" classname="CurrentTestInfoTest" />
+  </testsuite>
+  <testsuite name="NestedTestingNamespaceTest" tests="2" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="Success" status="run" time="0" classname="NestedTestingNamespaceTest" />
+    <testcase name="Failure" status="run" time="0" classname="NestedTestingNamespaceTest" />
+  </testsuite>
+  <testsuite name="StreamingAssertionsTest" tests="13" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="Unconditional" status="run" time="0" classname="StreamingAssertionsTest" />
+    <testcase name="Truth" status="run" time="0" classname="StreamingAssertionsTest" />
+    <testcase name="Truth2" status="run" time="0" classname="StreamingAssertionsTest" />
+    <testcase name="IntegerEquals" status="run" time="0.001" classname="StreamingAssertionsTest" />
+    <testcase name="IntegerLessThan" status="run" time="0" classname="StreamingAssertionsTest" />
+    <testcase name="StringsEqual" status="run" time="0" classname="StreamingAssertionsTest" />
+    <testcase name="StringsNotEqual" status="run" time="0" classname="StreamingAssertionsTest" />
+    <testcase name="StringsEqualIgnoringCase" status="run" time="0" classname="StreamingAssertionsTest" />
+    <testcase name="StringNotEqualIgnoringCase" status="run" time="0" classname="StreamingAssertionsTest" />
+    <testcase name="FloatingPointEquals" status="run" time="0" classname="StreamingAssertionsTest" />
+    <testcase name="Throw" status="run" time="0" classname="StreamingAssertionsTest" />
+    <testcase name="NoThrow" status="run" time="0" classname="StreamingAssertionsTest" />
+    <testcase name="AnyThrow" status="run" time="0" classname="StreamingAssertionsTest" />
+  </testsuite>
+  <testsuite name="ColoredOutputTest" tests="6" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="UsesColorsWhenGTestColorFlagIsYes" status="run" time="0" classname="ColoredOutputTest" />
+    <testcase name="UsesColorsWhenGTestColorFlagIsAliasOfYes" status="run" time="0" classname="ColoredOutputTest" />
+    <testcase name="UsesNoColorWhenGTestColorFlagIsNo" status="run" time="0" classname="ColoredOutputTest" />
+    <testcase name="UsesNoColorWhenGTestColorFlagIsInvalid" status="run" time="0" classname="ColoredOutputTest" />
+    <testcase name="UsesColorsWhenStdoutIsTty" status="run" time="0" classname="ColoredOutputTest" />
+    <testcase name="UsesColorsWhenTermSupportsColors" status="run" time="0" classname="ColoredOutputTest" />
+  </testsuite>
+  <testsuite name="StaticAssertTypeEqTest" tests="2" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="WorksInClass" status="run" time="0" classname="StaticAssertTypeEqTest" />
+    <testcase name="CompilesForEqualTypes" status="run" time="0" classname="StaticAssertTypeEqTest" />
+  </testsuite>
+  <testsuite name="GetCurrentOsStackTraceExceptTopTest" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="ReturnsTheStackTrace" status="run" time="0" classname="GetCurrentOsStackTraceExceptTopTest" />
+  </testsuite>
+  <testsuite name="HasNonfatalFailureTest" tests="6" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="ReturnsFalseWhenThereIsNoFailure" status="run" time="0" classname="HasNonfatalFailureTest" />
+    <testcase name="ReturnsFalseWhenThereIsOnlyFatalFailure" status="run" time="0" classname="HasNonfatalFailureTest" />
+    <testcase name="ReturnsTrueWhenThereIsNonfatalFailure" status="run" time="0" classname="HasNonfatalFailureTest" />
+    <testcase name="ReturnsTrueWhenThereAreFatalAndNonfatalFailures" status="run" time="0" classname="HasNonfatalFailureTest" />
+    <testcase name="WorksOutsideOfTestBody" status="run" time="0" classname="HasNonfatalFailureTest" />
+    <testcase name="WorksOutsideOfTestBody2" status="run" time="0" classname="HasNonfatalFailureTest" />
+  </testsuite>
+  <testsuite name="HasFailureTest" tests="6" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="ReturnsFalseWhenThereIsNoFailure" status="run" time="0" classname="HasFailureTest" />
+    <testcase name="ReturnsTrueWhenThereIsFatalFailure" status="run" time="0" classname="HasFailureTest" />
+    <testcase name="ReturnsTrueWhenThereIsNonfatalFailure" status="run" time="0" classname="HasFailureTest" />
+    <testcase name="ReturnsTrueWhenThereAreFatalAndNonfatalFailures" status="run" time="0" classname="HasFailureTest" />
+    <testcase name="WorksOutsideOfTestBody" status="run" time="0" classname="HasFailureTest" />
+    <testcase name="WorksOutsideOfTestBody2" status="run" time="0" classname="HasFailureTest" />
+  </testsuite>
+  <testsuite name="TestEventListenersTest" tests="4" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="ConstructionWorks" status="run" time="0" classname="TestEventListenersTest" />
+    <testcase name="DestructionWorks" status="run" time="0" classname="TestEventListenersTest" />
+    <testcase name="Append" status="run" time="0" classname="TestEventListenersTest" />
+    <testcase name="Release" status="run" time="0" classname="TestEventListenersTest" />
+  </testsuite>
+  <testsuite name="EventListenerTest" tests="6" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="AppendKeepsOrder" status="run" time="0" classname="EventListenerTest" />
+    <testcase name="SuppressEventForwarding" status="run" time="0" classname="EventListenerTest" />
+    <testcase name="default_result_printer" status="run" time="0" classname="EventListenerTest" />
+    <testcase name="RemovingDefaultResultPrinterWorks" status="run" time="0" classname="EventListenerTest" />
+    <testcase name="default_xml_generator" status="run" time="0" classname="EventListenerTest" />
+    <testcase name="RemovingDefaultXmlGeneratorWorks" status="run" time="0" classname="EventListenerTest" />
+  </testsuite>
+  <testsuite name="AlternativeNameTest" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="Works" status="run" time="0" classname="AlternativeNameTest" />
+  </testsuite>
+  <testsuite name="IsAProtocolMessageTest" tests="3" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="ValueIsCompileTimeConstant" status="run" time="0" classname="IsAProtocolMessageTest" />
+    <testcase name="ValueIsTrueWhenTypeIsAProtocolMessage" status="run" time="0" classname="IsAProtocolMessageTest" />
+    <testcase name="ValueIsFalseWhenTypeIsNotAProtocolMessage" status="run" time="0" classname="IsAProtocolMessageTest" />
+  </testsuite>
+  <testsuite name="CompileAssertTypesEqual" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="CompilesWhenTypesAreEqual" status="run" time="0" classname="CompileAssertTypesEqual" />
+  </testsuite>
+  <testsuite name="RemoveReferenceTest" tests="3" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="DoesNotAffectNonReferenceType" status="run" time="0" classname="RemoveReferenceTest" />
+    <testcase name="RemovesReference" status="run" time="0" classname="RemoveReferenceTest" />
+    <testcase name="MacroVersion" status="run" time="0" classname="RemoveReferenceTest" />
+  </testsuite>
+  <testsuite name="RemoveConstTest" tests="3" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="DoesNotAffectNonConstType" status="run" time="0" classname="RemoveConstTest" />
+    <testcase name="RemovesConst" status="run" time="0" classname="RemoveConstTest" />
+    <testcase name="MacroVersion" status="run" time="0" classname="RemoveConstTest" />
+  </testsuite>
+  <testsuite name="RemoveReferenceToConstTest" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="Works" status="run" time="0" classname="RemoveReferenceToConstTest" />
+  </testsuite>
+  <testsuite name="AddReferenceTest" tests="3" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="DoesNotAffectReferenceType" status="run" time="0" classname="AddReferenceTest" />
+    <testcase name="AddsReference" status="run" time="0" classname="AddReferenceTest" />
+    <testcase name="MacroVersion" status="run" time="0" classname="AddReferenceTest" />
+  </testsuite>
+  <testsuite name="GTestReferenceToConstTest" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="Works" status="run" time="0" classname="GTestReferenceToConstTest" />
+  </testsuite>
+  <testsuite name="ImplicitlyConvertibleTest" tests="3" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="ValueIsCompileTimeConstant" status="run" time="0" classname="ImplicitlyConvertibleTest" />
+    <testcase name="ValueIsTrueWhenConvertible" status="run" time="0" classname="ImplicitlyConvertibleTest" />
+    <testcase name="ValueIsFalseWhenNotConvertible" status="run" time="0" classname="ImplicitlyConvertibleTest" />
+  </testsuite>
+  <testsuite name="IsContainerTestTest" tests="2" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="WorksForNonContainer" status="run" time="0" classname="IsContainerTestTest" />
+    <testcase name="WorksForContainer" status="run" time="0" classname="IsContainerTestTest" />
+  </testsuite>
+  <testsuite name="ArrayEqTest" tests="3" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="WorksForDegeneratedArrays" status="run" time="0" classname="ArrayEqTest" />
+    <testcase name="WorksForOneDimensionalArrays" status="run" time="0" classname="ArrayEqTest" />
+    <testcase name="WorksForTwoDimensionalArrays" status="run" time="0" classname="ArrayEqTest" />
+  </testsuite>
+  <testsuite name="ArrayAwareFindTest" tests="2" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="WorksForOneDimensionalArray" status="run" time="0" classname="ArrayAwareFindTest" />
+    <testcase name="WorksForTwoDimensionalArray" status="run" time="0" classname="ArrayAwareFindTest" />
+  </testsuite>
+  <testsuite name="CopyArrayTest" tests="3" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="WorksForDegeneratedArrays" status="run" time="0" classname="CopyArrayTest" />
+    <testcase name="WorksForOneDimensionalArrays" status="run" time="0" classname="CopyArrayTest" />
+    <testcase name="WorksForTwoDimensionalArrays" status="run" time="0" classname="CopyArrayTest" />
+  </testsuite>
+  <testsuite name="NativeArrayTest" tests="5" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="ConstructorFromArrayWorks" status="run" time="0" classname="NativeArrayTest" />
+    <testcase name="CreatesAndDeletesCopyOfArrayWhenAskedTo" status="run" time="0" classname="NativeArrayTest" />
+    <testcase name="TypeMembersAreCorrect" status="run" time="0" classname="NativeArrayTest" />
+    <testcase name="MethodsWork" status="run" time="0" classname="NativeArrayTest" />
+    <testcase name="WorksForTwoDimensionalArray" status="run" time="0" classname="NativeArrayTest" />
+  </testsuite>
+  <testsuite name="SkipPrefixTest" tests="2" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="SkipsWhenPrefixMatches" status="run" time="0" classname="SkipPrefixTest" />
+    <testcase name="DoesNotSkipWhenPrefixDoesNotMatch" status="run" time="0" classname="SkipPrefixTest" />
+  </testsuite>
+  <testsuite name="PrivateCodeTest" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="CanAccessPrivateMembers" status="run" time="0" classname="PrivateCodeTest" />
+  </testsuite>
+  <testsuite name="PrivateCodeFixtureTest" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="CanAccessPrivateMembers" status="run" time="0" classname="PrivateCodeFixtureTest" />
+  </testsuite>
+  <testsuite name="EXPECT_PRED1Test" tests="8" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="FunctionOnBuiltInTypeSuccess" status="run" time="0" classname="EXPECT_PRED1Test" />
+    <testcase name="FunctionOnUserTypeSuccess" status="run" time="0" classname="EXPECT_PRED1Test" />
+    <testcase name="FunctorOnBuiltInTypeSuccess" status="run" time="0" classname="EXPECT_PRED1Test" />
+    <testcase name="FunctorOnUserTypeSuccess" status="run" time="0" classname="EXPECT_PRED1Test" />
+    <testcase name="FunctionOnBuiltInTypeFailure" status="run" time="0" classname="EXPECT_PRED1Test" />
+    <testcase name="FunctionOnUserTypeFailure" status="run" time="0" classname="EXPECT_PRED1Test" />
+    <testcase name="FunctorOnBuiltInTypeFailure" status="run" time="0" classname="EXPECT_PRED1Test" />
+    <testcase name="FunctorOnUserTypeFailure" status="run" time="0" classname="EXPECT_PRED1Test" />
+  </testsuite>
+  <testsuite name="ASSERT_PRED1Test" tests="8" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="FunctionOnBuiltInTypeSuccess" status="run" time="0" classname="ASSERT_PRED1Test" />
+    <testcase name="FunctionOnUserTypeSuccess" status="run" time="0" classname="ASSERT_PRED1Test" />
+    <testcase name="FunctorOnBuiltInTypeSuccess" status="run" time="0" classname="ASSERT_PRED1Test" />
+    <testcase name="FunctorOnUserTypeSuccess" status="run" time="0" classname="ASSERT_PRED1Test" />
+    <testcase name="FunctionOnBuiltInTypeFailure" status="run" time="0" classname="ASSERT_PRED1Test" />
+    <testcase name="FunctionOnUserTypeFailure" status="run" time="0" classname="ASSERT_PRED1Test" />
+    <testcase name="FunctorOnBuiltInTypeFailure" status="run" time="0" classname="ASSERT_PRED1Test" />
+    <testcase name="FunctorOnUserTypeFailure" status="run" time="0" classname="ASSERT_PRED1Test" />
+  </testsuite>
+  <testsuite name="EXPECT_PRED_FORMAT1Test" tests="8" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="FunctionOnBuiltInTypeSuccess" status="run" time="0" classname="EXPECT_PRED_FORMAT1Test" />
+    <testcase name="FunctionOnUserTypeSuccess" status="run" time="0" classname="EXPECT_PRED_FORMAT1Test" />
+    <testcase name="FunctorOnBuiltInTypeSuccess" status="run" time="0" classname="EXPECT_PRED_FORMAT1Test" />
+    <testcase name="FunctorOnUserTypeSuccess" status="run" time="0" classname="EXPECT_PRED_FORMAT1Test" />
+    <testcase name="FunctionOnBuiltInTypeFailure" status="run" time="0" classname="EXPECT_PRED_FORMAT1Test" />
+    <testcase name="FunctionOnUserTypeFailure" status="run" time="0" classname="EXPECT_PRED_FORMAT1Test" />
+    <testcase name="FunctorOnBuiltInTypeFailure" status="run" time="0" classname="EXPECT_PRED_FORMAT1Test" />
+    <testcase name="FunctorOnUserTypeFailure" status="run" time="0" classname="EXPECT_PRED_FORMAT1Test" />
+  </testsuite>
+  <testsuite name="ASSERT_PRED_FORMAT1Test" tests="8" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="FunctionOnBuiltInTypeSuccess" status="run" time="0" classname="ASSERT_PRED_FORMAT1Test" />
+    <testcase name="FunctionOnUserTypeSuccess" status="run" time="0" classname="ASSERT_PRED_FORMAT1Test" />
+    <testcase name="FunctorOnBuiltInTypeSuccess" status="run" time="0" classname="ASSERT_PRED_FORMAT1Test" />
+    <testcase name="FunctorOnUserTypeSuccess" status="run" time="0" classname="ASSERT_PRED_FORMAT1Test" />
+    <testcase name="FunctionOnBuiltInTypeFailure" status="run" time="0" classname="ASSERT_PRED_FORMAT1Test" />
+    <testcase name="FunctionOnUserTypeFailure" status="run" time="0" classname="ASSERT_PRED_FORMAT1Test" />
+    <testcase name="FunctorOnBuiltInTypeFailure" status="run" time="0" classname="ASSERT_PRED_FORMAT1Test" />
+    <testcase name="FunctorOnUserTypeFailure" status="run" time="0" classname="ASSERT_PRED_FORMAT1Test" />
+  </testsuite>
+  <testsuite name="EXPECT_PRED2Test" tests="8" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="FunctionOnBuiltInTypeSuccess" status="run" time="0" classname="EXPECT_PRED2Test" />
+    <testcase name="FunctionOnUserTypeSuccess" status="run" time="0" classname="EXPECT_PRED2Test" />
+    <testcase name="FunctorOnBuiltInTypeSuccess" status="run" time="0" classname="EXPECT_PRED2Test" />
+    <testcase name="FunctorOnUserTypeSuccess" status="run" time="0" classname="EXPECT_PRED2Test" />
+    <testcase name="FunctionOnBuiltInTypeFailure" status="run" time="0" classname="EXPECT_PRED2Test" />
+    <testcase name="FunctionOnUserTypeFailure" status="run" time="0" classname="EXPECT_PRED2Test" />
+    <testcase name="FunctorOnBuiltInTypeFailure" status="run" time="0" classname="EXPECT_PRED2Test" />
+    <testcase name="FunctorOnUserTypeFailure" status="run" time="0" classname="EXPECT_PRED2Test" />
+  </testsuite>
+  <testsuite name="ASSERT_PRED2Test" tests="8" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="FunctionOnBuiltInTypeSuccess" status="run" time="0" classname="ASSERT_PRED2Test" />
+    <testcase name="FunctionOnUserTypeSuccess" status="run" time="0" classname="ASSERT_PRED2Test" />
+    <testcase name="FunctorOnBuiltInTypeSuccess" status="run" time="0" classname="ASSERT_PRED2Test" />
+    <testcase name="FunctorOnUserTypeSuccess" status="run" time="0" classname="ASSERT_PRED2Test" />
+    <testcase name="FunctionOnBuiltInTypeFailure" status="run" time="0" classname="ASSERT_PRED2Test" />
+    <testcase name="FunctionOnUserTypeFailure" status="run" time="0" classname="ASSERT_PRED2Test" />
+    <testcase name="FunctorOnBuiltInTypeFailure" status="run" time="0" classname="ASSERT_PRED2Test" />
+    <testcase name="FunctorOnUserTypeFailure" status="run" time="0" classname="ASSERT_PRED2Test" />
+  </testsuite>
+  <testsuite name="EXPECT_PRED_FORMAT2Test" tests="8" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="FunctionOnBuiltInTypeSuccess" status="run" time="0" classname="EXPECT_PRED_FORMAT2Test" />
+    <testcase name="FunctionOnUserTypeSuccess" status="run" time="0" classname="EXPECT_PRED_FORMAT2Test" />
+    <testcase name="FunctorOnBuiltInTypeSuccess" status="run" time="0" classname="EXPECT_PRED_FORMAT2Test" />
+    <testcase name="FunctorOnUserTypeSuccess" status="run" time="0" classname="EXPECT_PRED_FORMAT2Test" />
+    <testcase name="FunctionOnBuiltInTypeFailure" status="run" time="0" classname="EXPECT_PRED_FORMAT2Test" />
+    <testcase name="FunctionOnUserTypeFailure" status="run" time="0" classname="EXPECT_PRED_FORMAT2Test" />
+    <testcase name="FunctorOnBuiltInTypeFailure" status="run" time="0" classname="EXPECT_PRED_FORMAT2Test" />
+    <testcase name="FunctorOnUserTypeFailure" status="run" time="0" classname="EXPECT_PRED_FORMAT2Test" />
+  </testsuite>
+  <testsuite name="ASSERT_PRED_FORMAT2Test" tests="8" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="FunctionOnBuiltInTypeSuccess" status="run" time="0" classname="ASSERT_PRED_FORMAT2Test" />
+    <testcase name="FunctionOnUserTypeSuccess" status="run" time="0" classname="ASSERT_PRED_FORMAT2Test" />
+    <testcase name="FunctorOnBuiltInTypeSuccess" status="run" time="0" classname="ASSERT_PRED_FORMAT2Test" />
+    <testcase name="FunctorOnUserTypeSuccess" status="run" time="0" classname="ASSERT_PRED_FORMAT2Test" />
+    <testcase name="FunctionOnBuiltInTypeFailure" status="run" time="0" classname="ASSERT_PRED_FORMAT2Test" />
+    <testcase name="FunctionOnUserTypeFailure" status="run" time="0" classname="ASSERT_PRED_FORMAT2Test" />
+    <testcase name="FunctorOnBuiltInTypeFailure" status="run" time="0" classname="ASSERT_PRED_FORMAT2Test" />
+    <testcase name="FunctorOnUserTypeFailure" status="run" time="0" classname="ASSERT_PRED_FORMAT2Test" />
+  </testsuite>
+  <testsuite name="EXPECT_PRED3Test" tests="8" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="FunctionOnBuiltInTypeSuccess" status="run" time="0" classname="EXPECT_PRED3Test" />
+    <testcase name="FunctionOnUserTypeSuccess" status="run" time="0" classname="EXPECT_PRED3Test" />
+    <testcase name="FunctorOnBuiltInTypeSuccess" status="run" time="0" classname="EXPECT_PRED3Test" />
+    <testcase name="FunctorOnUserTypeSuccess" status="run" time="0" classname="EXPECT_PRED3Test" />
+    <testcase name="FunctionOnBuiltInTypeFailure" status="run" time="0" classname="EXPECT_PRED3Test" />
+    <testcase name="FunctionOnUserTypeFailure" status="run" time="0" classname="EXPECT_PRED3Test" />
+    <testcase name="FunctorOnBuiltInTypeFailure" status="run" time="0" classname="EXPECT_PRED3Test" />
+    <testcase name="FunctorOnUserTypeFailure" status="run" time="0" classname="EXPECT_PRED3Test" />
+  </testsuite>
+  <testsuite name="ASSERT_PRED3Test" tests="8" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="FunctionOnBuiltInTypeSuccess" status="run" time="0" classname="ASSERT_PRED3Test" />
+    <testcase name="FunctionOnUserTypeSuccess" status="run" time="0" classname="ASSERT_PRED3Test" />
+    <testcase name="FunctorOnBuiltInTypeSuccess" status="run" time="0" classname="ASSERT_PRED3Test" />
+    <testcase name="FunctorOnUserTypeSuccess" status="run" time="0" classname="ASSERT_PRED3Test" />
+    <testcase name="FunctionOnBuiltInTypeFailure" status="run" time="0" classname="ASSERT_PRED3Test" />
+    <testcase name="FunctionOnUserTypeFailure" status="run" time="0.001" classname="ASSERT_PRED3Test" />
+    <testcase name="FunctorOnBuiltInTypeFailure" status="run" time="0" classname="ASSERT_PRED3Test" />
+    <testcase name="FunctorOnUserTypeFailure" status="run" time="0" classname="ASSERT_PRED3Test" />
+  </testsuite>
+  <testsuite name="EXPECT_PRED_FORMAT3Test" tests="8" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="FunctionOnBuiltInTypeSuccess" status="run" time="0" classname="EXPECT_PRED_FORMAT3Test" />
+    <testcase name="FunctionOnUserTypeSuccess" status="run" time="0" classname="EXPECT_PRED_FORMAT3Test" />
+    <testcase name="FunctorOnBuiltInTypeSuccess" status="run" time="0" classname="EXPECT_PRED_FORMAT3Test" />
+    <testcase name="FunctorOnUserTypeSuccess" status="run" time="0" classname="EXPECT_PRED_FORMAT3Test" />
+    <testcase name="FunctionOnBuiltInTypeFailure" status="run" time="0" classname="EXPECT_PRED_FORMAT3Test" />
+    <testcase name="FunctionOnUserTypeFailure" status="run" time="0" classname="EXPECT_PRED_FORMAT3Test" />
+    <testcase name="FunctorOnBuiltInTypeFailure" status="run" time="0" classname="EXPECT_PRED_FORMAT3Test" />
+    <testcase name="FunctorOnUserTypeFailure" status="run" time="0" classname="EXPECT_PRED_FORMAT3Test" />
+  </testsuite>
+  <testsuite name="ASSERT_PRED_FORMAT3Test" tests="8" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="FunctionOnBuiltInTypeSuccess" status="run" time="0" classname="ASSERT_PRED_FORMAT3Test" />
+    <testcase name="FunctionOnUserTypeSuccess" status="run" time="0" classname="ASSERT_PRED_FORMAT3Test" />
+    <testcase name="FunctorOnBuiltInTypeSuccess" status="run" time="0" classname="ASSERT_PRED_FORMAT3Test" />
+    <testcase name="FunctorOnUserTypeSuccess" status="run" time="0" classname="ASSERT_PRED_FORMAT3Test" />
+    <testcase name="FunctionOnBuiltInTypeFailure" status="run" time="0" classname="ASSERT_PRED_FORMAT3Test" />
+    <testcase name="FunctionOnUserTypeFailure" status="run" time="0" classname="ASSERT_PRED_FORMAT3Test" />
+    <testcase name="FunctorOnBuiltInTypeFailure" status="run" time="0" classname="ASSERT_PRED_FORMAT3Test" />
+    <testcase name="FunctorOnUserTypeFailure" status="run" time="0" classname="ASSERT_PRED_FORMAT3Test" />
+  </testsuite>
+  <testsuite name="EXPECT_PRED4Test" tests="8" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="FunctionOnBuiltInTypeSuccess" status="run" time="0" classname="EXPECT_PRED4Test" />
+    <testcase name="FunctionOnUserTypeSuccess" status="run" time="0" classname="EXPECT_PRED4Test" />
+    <testcase name="FunctorOnBuiltInTypeSuccess" status="run" time="0" classname="EXPECT_PRED4Test" />
+    <testcase name="FunctorOnUserTypeSuccess" status="run" time="0" classname="EXPECT_PRED4Test" />
+    <testcase name="FunctionOnBuiltInTypeFailure" status="run" time="0" classname="EXPECT_PRED4Test" />
+    <testcase name="FunctionOnUserTypeFailure" status="run" time="0.001" classname="EXPECT_PRED4Test" />
+    <testcase name="FunctorOnBuiltInTypeFailure" status="run" time="0" classname="EXPECT_PRED4Test" />
+    <testcase name="FunctorOnUserTypeFailure" status="run" time="0" classname="EXPECT_PRED4Test" />
+  </testsuite>
+  <testsuite name="ASSERT_PRED4Test" tests="8" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="FunctionOnBuiltInTypeSuccess" status="run" time="0" classname="ASSERT_PRED4Test" />
+    <testcase name="FunctionOnUserTypeSuccess" status="run" time="0" classname="ASSERT_PRED4Test" />
+    <testcase name="FunctorOnBuiltInTypeSuccess" status="run" time="0" classname="ASSERT_PRED4Test" />
+    <testcase name="FunctorOnUserTypeSuccess" status="run" time="0" classname="ASSERT_PRED4Test" />
+    <testcase name="FunctionOnBuiltInTypeFailure" status="run" time="0" classname="ASSERT_PRED4Test" />
+    <testcase name="FunctionOnUserTypeFailure" status="run" time="0" classname="ASSERT_PRED4Test" />
+    <testcase name="FunctorOnBuiltInTypeFailure" status="run" time="0" classname="ASSERT_PRED4Test" />
+    <testcase name="FunctorOnUserTypeFailure" status="run" time="0" classname="ASSERT_PRED4Test" />
+  </testsuite>
+  <testsuite name="EXPECT_PRED_FORMAT4Test" tests="8" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="FunctionOnBuiltInTypeSuccess" status="run" time="0" classname="EXPECT_PRED_FORMAT4Test" />
+    <testcase name="FunctionOnUserTypeSuccess" status="run" time="0" classname="EXPECT_PRED_FORMAT4Test" />
+    <testcase name="FunctorOnBuiltInTypeSuccess" status="run" time="0" classname="EXPECT_PRED_FORMAT4Test" />
+    <testcase name="FunctorOnUserTypeSuccess" status="run" time="0" classname="EXPECT_PRED_FORMAT4Test" />
+    <testcase name="FunctionOnBuiltInTypeFailure" status="run" time="0" classname="EXPECT_PRED_FORMAT4Test" />
+    <testcase name="FunctionOnUserTypeFailure" status="run" time="0" classname="EXPECT_PRED_FORMAT4Test" />
+    <testcase name="FunctorOnBuiltInTypeFailure" status="run" time="0" classname="EXPECT_PRED_FORMAT4Test" />
+    <testcase name="FunctorOnUserTypeFailure" status="run" time="0" classname="EXPECT_PRED_FORMAT4Test" />
+  </testsuite>
+  <testsuite name="ASSERT_PRED_FORMAT4Test" tests="8" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="FunctionOnBuiltInTypeSuccess" status="run" time="0" classname="ASSERT_PRED_FORMAT4Test" />
+    <testcase name="FunctionOnUserTypeSuccess" status="run" time="0" classname="ASSERT_PRED_FORMAT4Test" />
+    <testcase name="FunctorOnBuiltInTypeSuccess" status="run" time="0" classname="ASSERT_PRED_FORMAT4Test" />
+    <testcase name="FunctorOnUserTypeSuccess" status="run" time="0" classname="ASSERT_PRED_FORMAT4Test" />
+    <testcase name="FunctionOnBuiltInTypeFailure" status="run" time="0" classname="ASSERT_PRED_FORMAT4Test" />
+    <testcase name="FunctionOnUserTypeFailure" status="run" time="0" classname="ASSERT_PRED_FORMAT4Test" />
+    <testcase name="FunctorOnBuiltInTypeFailure" status="run" time="0" classname="ASSERT_PRED_FORMAT4Test" />
+    <testcase name="FunctorOnUserTypeFailure" status="run" time="0" classname="ASSERT_PRED_FORMAT4Test" />
+  </testsuite>
+  <testsuite name="EXPECT_PRED5Test" tests="8" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="FunctionOnBuiltInTypeSuccess" status="run" time="0" classname="EXPECT_PRED5Test" />
+    <testcase name="FunctionOnUserTypeSuccess" status="run" time="0" classname="EXPECT_PRED5Test" />
+    <testcase name="FunctorOnBuiltInTypeSuccess" status="run" time="0" classname="EXPECT_PRED5Test" />
+    <testcase name="FunctorOnUserTypeSuccess" status="run" time="0" classname="EXPECT_PRED5Test" />
+    <testcase name="FunctionOnBuiltInTypeFailure" status="run" time="0.001" classname="EXPECT_PRED5Test" />
+    <testcase name="FunctionOnUserTypeFailure" status="run" time="0" classname="EXPECT_PRED5Test" />
+    <testcase name="FunctorOnBuiltInTypeFailure" status="run" time="0" classname="EXPECT_PRED5Test" />
+    <testcase name="FunctorOnUserTypeFailure" status="run" time="0" classname="EXPECT_PRED5Test" />
+  </testsuite>
+  <testsuite name="ASSERT_PRED5Test" tests="8" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="FunctionOnBuiltInTypeSuccess" status="run" time="0" classname="ASSERT_PRED5Test" />
+    <testcase name="FunctionOnUserTypeSuccess" status="run" time="0" classname="ASSERT_PRED5Test" />
+    <testcase name="FunctorOnBuiltInTypeSuccess" status="run" time="0" classname="ASSERT_PRED5Test" />
+    <testcase name="FunctorOnUserTypeSuccess" status="run" time="0" classname="ASSERT_PRED5Test" />
+    <testcase name="FunctionOnBuiltInTypeFailure" status="run" time="0" classname="ASSERT_PRED5Test" />
+    <testcase name="FunctionOnUserTypeFailure" status="run" time="0" classname="ASSERT_PRED5Test" />
+    <testcase name="FunctorOnBuiltInTypeFailure" status="run" time="0" classname="ASSERT_PRED5Test" />
+    <testcase name="FunctorOnUserTypeFailure" status="run" time="0" classname="ASSERT_PRED5Test" />
+  </testsuite>
+  <testsuite name="EXPECT_PRED_FORMAT5Test" tests="8" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="FunctionOnBuiltInTypeSuccess" status="run" time="0" classname="EXPECT_PRED_FORMAT5Test" />
+    <testcase name="FunctionOnUserTypeSuccess" status="run" time="0" classname="EXPECT_PRED_FORMAT5Test" />
+    <testcase name="FunctorOnBuiltInTypeSuccess" status="run" time="0" classname="EXPECT_PRED_FORMAT5Test" />
+    <testcase name="FunctorOnUserTypeSuccess" status="run" time="0" classname="EXPECT_PRED_FORMAT5Test" />
+    <testcase name="FunctionOnBuiltInTypeFailure" status="run" time="0" classname="EXPECT_PRED_FORMAT5Test" />
+    <testcase name="FunctionOnUserTypeFailure" status="run" time="0" classname="EXPECT_PRED_FORMAT5Test" />
+    <testcase name="FunctorOnBuiltInTypeFailure" status="run" time="0" classname="EXPECT_PRED_FORMAT5Test" />
+    <testcase name="FunctorOnUserTypeFailure" status="run" time="0" classname="EXPECT_PRED_FORMAT5Test" />
+  </testsuite>
+  <testsuite name="ASSERT_PRED_FORMAT5Test" tests="8" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="FunctionOnBuiltInTypeSuccess" status="run" time="0" classname="ASSERT_PRED_FORMAT5Test" />
+    <testcase name="FunctionOnUserTypeSuccess" status="run" time="0" classname="ASSERT_PRED_FORMAT5Test" />
+    <testcase name="FunctorOnBuiltInTypeSuccess" status="run" time="0" classname="ASSERT_PRED_FORMAT5Test" />
+    <testcase name="FunctorOnUserTypeSuccess" status="run" time="0" classname="ASSERT_PRED_FORMAT5Test" />
+    <testcase name="FunctionOnBuiltInTypeFailure" status="run" time="0" classname="ASSERT_PRED_FORMAT5Test" />
+    <testcase name="FunctionOnUserTypeFailure" status="run" time="0" classname="ASSERT_PRED_FORMAT5Test" />
+    <testcase name="FunctorOnBuiltInTypeFailure" status="run" time="0" classname="ASSERT_PRED_FORMAT5Test" />
+    <testcase name="FunctorOnUserTypeFailure" status="run" time="0" classname="ASSERT_PRED_FORMAT5Test" />
+  </testsuite>
+  <testsuite name="CommonTest/0" tests="2" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="ValuesAreCorrect" type_param="char" status="run" time="0" classname="CommonTest/0" />
+    <testcase name="ValuesAreStillCorrect" type_param="char" status="run" time="0" classname="CommonTest/0" />
+  </testsuite>
+  <testsuite name="CommonTest/1" tests="2" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="ValuesAreCorrect" type_param="int" status="run" time="0" classname="CommonTest/1" />
+    <testcase name="ValuesAreStillCorrect" type_param="int" status="run" time="0" classname="CommonTest/1" />
+  </testsuite>
+  <testsuite name="TypedTest1/0" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="A" type_param="int" status="run" time="0" classname="TypedTest1/0" />
+  </testsuite>
+  <testsuite name="TypedTest2/0" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="A" type_param="int" status="run" time="0" classname="TypedTest2/0" />
+  </testsuite>
+  <testsuite name="NumericTest/0" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="DefaultIsZero" type_param="int" status="run" time="0" classname="NumericTest/0" />
+  </testsuite>
+  <testsuite name="NumericTest/1" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="DefaultIsZero" type_param="long" status="run" time="0" classname="NumericTest/1" />
+  </testsuite>
+  <testsuite name="TypedTestCasePStateTest" tests="2" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="SucceedsForMatchingList" status="run" time="0" classname="TypedTestCasePStateTest" />
+    <testcase name="IgnoresOrderAndSpaces" status="run" time="0" classname="TypedTestCasePStateTest" />
+  </testsuite>
+  <testsuite name="My/DerivedTest/0" tests="2" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="ValuesAreCorrect" type_param="short" status="run" time="0" classname="My/DerivedTest/0" />
+    <testcase name="ValuesAreStillCorrect" type_param="short" status="run" time="0" classname="My/DerivedTest/0" />
+  </testsuite>
+  <testsuite name="My/DerivedTest/1" tests="2" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="ValuesAreCorrect" type_param="long" status="run" time="0" classname="My/DerivedTest/1" />
+    <testcase name="ValuesAreStillCorrect" type_param="long" status="run" time="0" classname="My/DerivedTest/1" />
+  </testsuite>
+  <testsuite name="Int/TypedTestP1/0" tests="2" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="A" type_param="int" status="run" time="0" classname="Int/TypedTestP1/0" />
+    <testcase name="B" type_param="int" status="run" time="0" classname="Int/TypedTestP1/0" />
+  </testsuite>
+  <testsuite name="Int/TypedTestP2/0" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="A" type_param="int" status="run" time="0" classname="Int/TypedTestP2/0" />
+  </testsuite>
+  <testsuite name="Double/TypedTestP2/0" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="A" type_param="double" status="run" time="0" classname="Double/TypedTestP2/0" />
+  </testsuite>
+  <testsuite name="My/ContainerTest/0" tests="2" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="CanBeDefaultConstructed" type_param="std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;" status="run" time="0" classname="My/ContainerTest/0" />
+    <testcase name="InitialSizeIsZero" type_param="std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;" status="run" time="0" classname="My/ContainerTest/0" />
+  </testsuite>
+  <testsuite name="My/ContainerTest/1" tests="2" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="CanBeDefaultConstructed" type_param="std::__1::set&lt;char, std::__1::less&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;" status="run" time="0" classname="My/ContainerTest/1" />
+    <testcase name="InitialSizeIsZero" type_param="std::__1::set&lt;char, std::__1::less&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;" status="run" time="0" classname="My/ContainerTest/1" />
+  </testsuite>
+  <testsuite name="My/NumericTest/0" tests="2" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="DefaultIsZero" type_param="int" status="run" time="0" classname="My/NumericTest/0" />
+    <testcase name="ZeroIsLessThanOne" type_param="int" status="run" time="0" classname="My/NumericTest/0" />
+  </testsuite>
+  <testsuite name="My/NumericTest/1" tests="2" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="DefaultIsZero" type_param="double" status="run" time="0" classname="My/NumericTest/1" />
+    <testcase name="ZeroIsLessThanOne" type_param="double" status="run" time="0" classname="My/NumericTest/1" />
+  </testsuite>
+  <testsuite name="Vector/ContainerTest/0" tests="2" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="CanBeDefaultConstructed" type_param="std::__1::vector&lt;int, std::__1::allocator&lt;int&gt; &gt;" status="run" time="0" classname="Vector/ContainerTest/0" />
+    <testcase name="InitialSizeIsZero" type_param="std::__1::vector&lt;int, std::__1::allocator&lt;int&gt; &gt;" status="run" time="0" classname="Vector/ContainerTest/0" />
+  </testsuite>
+  <testsuite name="TestPartResultTest" tests="10" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="ConstructorWorks" status="run" time="0" classname="TestPartResultTest" />
+    <testcase name="ResultAccessorsWork" status="run" time="0" classname="TestPartResultTest" />
+    <testcase name="type" status="run" time="0" classname="TestPartResultTest" />
+    <testcase name="file_name" status="run" time="0" classname="TestPartResultTest" />
+    <testcase name="line_number" status="run" time="0" classname="TestPartResultTest" />
+    <testcase name="message" status="run" time="0" classname="TestPartResultTest" />
+    <testcase name="Passed" status="run" time="0" classname="TestPartResultTest" />
+    <testcase name="Failed" status="run" time="0" classname="TestPartResultTest" />
+    <testcase name="FatallyFailed" status="run" time="0" classname="TestPartResultTest" />
+    <testcase name="NonfatallyFailed" status="run" time="0" classname="TestPartResultTest" />
+  </testsuite>
+  <testsuite name="TestPartResultArrayTest" tests="3" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="InitialSizeIsZero" status="run" time="0" classname="TestPartResultArrayTest" />
+    <testcase name="ContainsGivenResultAfterAppend" status="run" time="0" classname="TestPartResultArrayTest" />
+    <testcase name="ContainsGivenResultsAfterTwoAppends" status="run" time="0" classname="TestPartResultArrayTest" />
+  </testsuite>
+  <testsuite name="IsXDigitTest" tests="4" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="WorksForNarrowAscii" status="run" time="0" classname="IsXDigitTest" />
+    <testcase name="ReturnsFalseForNarrowNonAscii" status="run" time="0" classname="IsXDigitTest" />
+    <testcase name="WorksForWideAscii" status="run" time="0" classname="IsXDigitTest" />
+    <testcase name="ReturnsFalseForWideNonAscii" status="run" time="0" classname="IsXDigitTest" />
+  </testsuite>
+  <testsuite name="ImplicitCastTest" tests="6" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="ConvertsPointers" status="run" time="0" classname="ImplicitCastTest" />
+    <testcase name="CanUseInheritance" status="run" time="0" classname="ImplicitCastTest" />
+    <testcase name="CanUseNonConstCastOperator" status="run" time="0" classname="ImplicitCastTest" />
+    <testcase name="CanUseConstCastOperatorOnConstValues" status="run" time="0" classname="ImplicitCastTest" />
+    <testcase name="CanSelectBetweenConstAndNonConstCasrAppropriately" status="run" time="0" classname="ImplicitCastTest" />
+    <testcase name="CanUseImplicitConstructor" status="run" time="0" classname="ImplicitCastTest" />
+  </testsuite>
+  <testsuite name="IteratorTraitsTest" tests="3" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="WorksForSTLContainerIterators" status="run" time="0" classname="IteratorTraitsTest" />
+    <testcase name="WorksForPointerToNonConst" status="run" time="0" classname="IteratorTraitsTest" />
+    <testcase name="WorksForPointerToConst" status="run" time="0" classname="IteratorTraitsTest" />
+  </testsuite>
+  <testsuite name="ScopedPtrTest" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="DefinesElementType" status="run" time="0" classname="ScopedPtrTest" />
+  </testsuite>
+  <testsuite name="GtestCheckSyntaxTest" tests="2" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="BehavesLikeASingleStatement" status="run" time="0" classname="GtestCheckSyntaxTest" />
+    <testcase name="WorksWithSwitch" status="run" time="0" classname="GtestCheckSyntaxTest" />
+  </testsuite>
+  <testsuite name="FormatFileLocationTest" tests="4" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="FormatsFileLocation" status="run" time="0" classname="FormatFileLocationTest" />
+    <testcase name="FormatsUnknownFile" status="run" time="0" classname="FormatFileLocationTest" />
+    <testcase name="FormatsUknownLine" status="run" time="0" classname="FormatFileLocationTest" />
+    <testcase name="FormatsUknownFileAndLine" status="run" time="0" classname="FormatFileLocationTest" />
+  </testsuite>
+  <testsuite name="FormatCompilerIndependentFileLocationTest" tests="4" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="FormatsFileLocation" status="run" time="0" classname="FormatCompilerIndependentFileLocationTest" />
+    <testcase name="FormatsUknownFile" status="run" time="0" classname="FormatCompilerIndependentFileLocationTest" />
+    <testcase name="FormatsUknownLine" status="run" time="0" classname="FormatCompilerIndependentFileLocationTest" />
+    <testcase name="FormatsUknownFileAndLine" status="run" time="0" classname="FormatCompilerIndependentFileLocationTest" />
+  </testsuite>
+  <testsuite name="GetThreadCountTest" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="ReturnsCorrectValue" status="run" time="0" classname="GetThreadCountTest" />
+  </testsuite>
+  <testsuite name="RegexEngineSelectionTest" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="SelectsCorrectRegexEngine" status="run" time="0" classname="RegexEngineSelectionTest" />
+  </testsuite>
+  <testsuite name="RETest/0" tests="4" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="ImplicitConstructorWorks" type_param="std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;" status="run" time="0" classname="RETest/0" />
+    <testcase name="RejectsInvalidRegex" type_param="std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;" status="run" time="0" classname="RETest/0" />
+    <testcase name="FullMatchWorks" type_param="std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;" status="run" time="0" classname="RETest/0" />
+    <testcase name="PartialMatchWorks" type_param="std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;" status="run" time="0" classname="RETest/0" />
+  </testsuite>
+  <testsuite name="RETest/1" tests="4" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="ImplicitConstructorWorks" type_param="char const*" status="run" time="0" classname="RETest/1" />
+    <testcase name="RejectsInvalidRegex" type_param="char const*" status="run" time="0" classname="RETest/1" />
+    <testcase name="FullMatchWorks" type_param="char const*" status="run" time="0" classname="RETest/1" />
+    <testcase name="PartialMatchWorks" type_param="char const*" status="run" time="0" classname="RETest/1" />
+  </testsuite>
+  <testsuite name="CaptureTest" tests="3" failures="0" disabled="0" errors="0" time="0.008">
+    <testcase name="CapturesStdout" status="run" time="0.003" classname="CaptureTest" />
+    <testcase name="CapturesStderr" status="run" time="0.003" classname="CaptureTest" />
+    <testcase name="CapturesStdoutAndStderr" status="run" time="0.002" classname="CaptureTest" />
+  </testsuite>
+  <testsuite name="ThreadLocalTest" tests="9" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="DefaultConstructorInitializesToDefaultValues" status="run" time="0" classname="ThreadLocalTest" />
+    <testcase name="SingleParamConstructorInitializesToParam" status="run" time="0" classname="ThreadLocalTest" />
+    <testcase name="ValueDefaultContructorIsNotRequiredForParamVersion" status="run" time="0" classname="ThreadLocalTest" />
+    <testcase name="GetAndPointerReturnSameValue" status="run" time="0" classname="ThreadLocalTest" />
+    <testcase name="PointerAndConstPointerReturnSameValue" status="run" time="0" classname="ThreadLocalTest" />
+    <testcase name="ParameterizedConstructorSetsDefault" status="run" time="0" classname="ThreadLocalTest" />
+    <testcase name="DestroysManagedObjectForOwnThreadWhenDying" status="run" time="0" classname="ThreadLocalTest" />
+    <testcase name="DestroysManagedObjectAtThreadExit" status="run" time="0" classname="ThreadLocalTest" />
+    <testcase name="ThreadLocalMutationsAffectOnlyCurrentThread" status="run" time="0.001" classname="ThreadLocalTest" />
+  </testsuite>
+  <testsuite name="ThreadWithParamTest" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="ConstructorExecutesThreadFunc" status="run" time="0" classname="ThreadWithParamTest" />
+  </testsuite>
+  <testsuite name="MutexTest" tests="2" failures="0" disabled="0" errors="0" time="2.101">
+    <testcase name="AssertHeldShouldNotAssertWhenLocked" status="run" time="0" classname="MutexTest" />
+    <testcase name="OnlyOneThreadCanLockAtATime" status="run" time="2.1" classname="MutexTest" />
+  </testsuite>
+  <testsuite name="XmlOutputTest" tests="5" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="GetOutputFormatDefault" status="run" time="0" classname="XmlOutputTest" />
+    <testcase name="GetOutputFormat" status="run" time="0" classname="XmlOutputTest" />
+    <testcase name="GetOutputFileDefault" status="run" time="0" classname="XmlOutputTest" />
+    <testcase name="GetOutputFileSingleFile" status="run" time="0" classname="XmlOutputTest" />
+    <testcase name="GetOutputFileFromDirectoryPath" status="run" time="0" classname="XmlOutputTest" />
+  </testsuite>
+  <testsuite name="OutputFileHelpersTest" tests="1" failures="0" disabled="1" errors="0" time="0">
+    <testcase name="DISABLED_GetCurrentExecutableName" status="notrun" time="0" classname="OutputFileHelpersTest" />
+  </testsuite>
+  <testsuite name="XmlOutputChangeDirTest" tests="6" failures="0" disabled="0" errors="0" time="0.002">
+    <testcase name="PreserveOriginalWorkingDirWithDefault" status="run" time="0" classname="XmlOutputChangeDirTest" />
+    <testcase name="PreserveOriginalWorkingDirWithDefaultXML" status="run" time="0" classname="XmlOutputChangeDirTest" />
+    <testcase name="PreserveOriginalWorkingDirWithRelativeFile" status="run" time="0" classname="XmlOutputChangeDirTest" />
+    <testcase name="PreserveOriginalWorkingDirWithRelativePath" status="run" time="0" classname="XmlOutputChangeDirTest" />
+    <testcase name="PreserveOriginalWorkingDirWithAbsoluteFile" status="run" time="0.001" classname="XmlOutputChangeDirTest" />
+    <testcase name="PreserveOriginalWorkingDirWithAbsolutePath" status="run" time="0" classname="XmlOutputChangeDirTest" />
+  </testsuite>
+  <testsuite name="LinkedPtrTest" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="GeneralTest" status="run" time="0" classname="LinkedPtrTest" />
+  </testsuite>
+  <testsuite name="GetCurrentDirTest" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="ReturnsCurrentDir" status="run" time="0" classname="GetCurrentDirTest" />
+  </testsuite>
+  <testsuite name="IsEmptyTest" tests="2" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="ReturnsTrueForEmptyPath" status="run" time="0" classname="IsEmptyTest" />
+    <testcase name="ReturnsFalseForNonEmptyPath" status="run" time="0" classname="IsEmptyTest" />
+  </testsuite>
+  <testsuite name="RemoveDirectoryNameTest" tests="6" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="WhenEmptyName" status="run" time="0" classname="RemoveDirectoryNameTest" />
+    <testcase name="ButNoDirectory" status="run" time="0" classname="RemoveDirectoryNameTest" />
+    <testcase name="RootFileShouldGiveFileName" status="run" time="0" classname="RemoveDirectoryNameTest" />
+    <testcase name="WhereThereIsNoFileName" status="run" time="0" classname="RemoveDirectoryNameTest" />
+    <testcase name="ShouldGiveFileName" status="run" time="0" classname="RemoveDirectoryNameTest" />
+    <testcase name="ShouldAlsoGiveFileName" status="run" time="0" classname="RemoveDirectoryNameTest" />
+  </testsuite>
+  <testsuite name="RemoveFileNameTest" tests="5" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="EmptyName" status="run" time="0" classname="RemoveFileNameTest" />
+    <testcase name="ButNoFile" status="run" time="0" classname="RemoveFileNameTest" />
+    <testcase name="GivesDirName" status="run" time="0" classname="RemoveFileNameTest" />
+    <testcase name="GivesDirAndSubDirName" status="run" time="0" classname="RemoveFileNameTest" />
+    <testcase name="GivesRootDir" status="run" time="0" classname="RemoveFileNameTest" />
+  </testsuite>
+  <testsuite name="MakeFileNameTest" tests="6" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="GenerateWhenNumberIsZero" status="run" time="0" classname="MakeFileNameTest" />
+    <testcase name="GenerateFileNameNumberGtZero" status="run" time="0" classname="MakeFileNameTest" />
+    <testcase name="GenerateFileNameWithSlashNumberIsZero" status="run" time="0" classname="MakeFileNameTest" />
+    <testcase name="GenerateFileNameWithSlashNumberGtZero" status="run" time="0.001" classname="MakeFileNameTest" />
+    <testcase name="GenerateWhenNumberIsZeroAndDirIsEmpty" status="run" time="0" classname="MakeFileNameTest" />
+    <testcase name="GenerateWhenNumberIsNotZeroAndDirIsEmpty" status="run" time="0" classname="MakeFileNameTest" />
+  </testsuite>
+  <testsuite name="ConcatPathsTest" tests="8" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="WorksWhenDirDoesNotEndWithPathSep" status="run" time="0" classname="ConcatPathsTest" />
+    <testcase name="WorksWhenPath1EndsWithPathSep" status="run" time="0" classname="ConcatPathsTest" />
+    <testcase name="Path1BeingEmpty" status="run" time="0" classname="ConcatPathsTest" />
+    <testcase name="Path2BeingEmpty" status="run" time="0" classname="ConcatPathsTest" />
+    <testcase name="BothPathBeingEmpty" status="run" time="0" classname="ConcatPathsTest" />
+    <testcase name="Path1ContainsPathSep" status="run" time="0" classname="ConcatPathsTest" />
+    <testcase name="Path2ContainsPathSep" status="run" time="0" classname="ConcatPathsTest" />
+    <testcase name="Path2EndsWithPathSep" status="run" time="0" classname="ConcatPathsTest" />
+  </testsuite>
+  <testsuite name="RemoveTrailingPathSeparatorTest" tests="5" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="EmptyString" status="run" time="0" classname="RemoveTrailingPathSeparatorTest" />
+    <testcase name="FileNoSlashString" status="run" time="0" classname="RemoveTrailingPathSeparatorTest" />
+    <testcase name="ShouldRemoveTrailingSeparator" status="run" time="0" classname="RemoveTrailingPathSeparatorTest" />
+    <testcase name="ShouldRemoveLastSeparator" status="run" time="0" classname="RemoveTrailingPathSeparatorTest" />
+    <testcase name="ShouldReturnUnmodified" status="run" time="0" classname="RemoveTrailingPathSeparatorTest" />
+  </testsuite>
+  <testsuite name="DirectoryTest" tests="3" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="RootDirectoryExists" status="run" time="0" classname="DirectoryTest" />
+    <testcase name="EmptyPathDirectoryDoesNotExist" status="run" time="0" classname="DirectoryTest" />
+    <testcase name="CurrentDirectoryExists" status="run" time="0" classname="DirectoryTest" />
+  </testsuite>
+  <testsuite name="NormalizeTest" tests="3" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="MultipleConsecutiveSepaparatorsInMidstring" status="run" time="0" classname="NormalizeTest" />
+    <testcase name="MultipleConsecutiveSepaparatorsAtStringStart" status="run" time="0" classname="NormalizeTest" />
+    <testcase name="MultipleConsecutiveSepaparatorsAtStringEnd" status="run" time="0" classname="NormalizeTest" />
+  </testsuite>
+  <testsuite name="AssignmentOperatorTest" tests="3" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="DefaultAssignedToNonDefault" status="run" time="0" classname="AssignmentOperatorTest" />
+    <testcase name="NonDefaultAssignedToDefault" status="run" time="0" classname="AssignmentOperatorTest" />
+    <testcase name="ConstAssignedToNonConst" status="run" time="0" classname="AssignmentOperatorTest" />
+  </testsuite>
+  <testsuite name="DirectoryCreationTest" tests="4" failures="0" disabled="0" errors="0" time="0.003">
+    <testcase name="CreateDirectoriesRecursively" status="run" time="0" classname="DirectoryCreationTest" />
+    <testcase name="CreateDirectoriesForAlreadyExistingPath" status="run" time="0.001" classname="DirectoryCreationTest" />
+    <testcase name="CreateDirectoriesAndUniqueFilename" status="run" time="0.001" classname="DirectoryCreationTest" />
+    <testcase name="CreateDirectoriesFail" status="run" time="0.001" classname="DirectoryCreationTest" />
+  </testsuite>
+  <testsuite name="NoDirectoryCreationTest" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="CreateNoDirectoriesForDefaultXmlFile" status="run" time="0" classname="NoDirectoryCreationTest" />
+  </testsuite>
+  <testsuite name="FilePathTest" tests="10" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="DefaultConstructor" status="run" time="0" classname="FilePathTest" />
+    <testcase name="CharAndCopyConstructors" status="run" time="0" classname="FilePathTest" />
+    <testcase name="StringConstructor" status="run" time="0" classname="FilePathTest" />
+    <testcase name="Set" status="run" time="0" classname="FilePathTest" />
+    <testcase name="ToString" status="run" time="0" classname="FilePathTest" />
+    <testcase name="RemoveExtension" status="run" time="0" classname="FilePathTest" />
+    <testcase name="RemoveExtensionWhenThereIsNoExtension" status="run" time="0" classname="FilePathTest" />
+    <testcase name="IsDirectory" status="run" time="0" classname="FilePathTest" />
+    <testcase name="IsAbsolutePath" status="run" time="0" classname="FilePathTest" />
+    <testcase name="IsRootDirectory" status="run" time="0" classname="FilePathTest" />
+  </testsuite>
+</testsuites>

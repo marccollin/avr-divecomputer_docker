@@ -1,0 +1,146 @@
+
+Bare-metal
+----------
+
+GNU Tools for Embedded
+
+-Wall -Wextra -Werror -Wabi
+-fmessage-length=0 -c -ffunction-sections -fdata-sections 
+
+-Wabi -fno-use-cxa-atexit -fno-threadsafe-statics
+
+-g3 / -g
+-Os / -O0
+
+-std=gnu / -std=c++11
+
+Target Processor
+	Family: cortex-m4
+	Float ABI: soft
+
+Optimization:
+	Level: -Og (Debug) / -Os (Release)
+	-fmessage-length=0
+	-fsigned-char
+	-ffunction-sections
+	-fdata-sections
+
+Warnings:
+	-Wall
+	-Wextra
+	-Werror
+
+
+Debugging:
+	Level: -g3 (Debug) / -g (Release)
+
+Cross ARM C Compiler:
+	Optimization
+		Language: -std=gnu11
+
+Cross ARM C++ Compiler:
+	Optimization
+		Language: -std=gnu++11
+		-fno-exceptions
+		-fno-rtti
+		Other: -fno-use-cxa-atexit -fno-threadsafe-statics -fabi-version=6
+	Warnings:
+		-Wabi
+
+Cross ARM C++ Linker:
+	General:
+		Script files: mem.ld, libs.ld, sections.ld
+		-nostartupfiles
+		-Xlinker --gc-sections
+	Library path:
+		../ldscripts
+
+	Miscellaneous: --specs=nano.specs
+
+
+===============================================================================
+
+OS X
+----
+
+Apple clang (http://clang.llvm.org)
+
+Executables:
+
+	clang/clang++/ar
+
+C/C++ Build -> Settings
+
+LLVM Clang
+	Dialect: 
+		Language standard: ISO C11 (-std=c11)
+	
+	Optimization:
+		Level: -O0 (Debug) / -O3 (Release)
+		Other: -fsigned-char
+
+	Debugging:
+		Level: -g (-g3 is the same)
+
+	Warnings:
+		-Wall
+		-Werror
+
+	Miscellaneous:
+		-c -fmessage-length=0 -emit-llvm
+		-m64 / -m32
+		
+		-Weverything if possible
+ 
+LLVM Clang++
+	Dialect:
+		Language standard: ISO C++11 (-std=c++0x, same as c++11)
+
+	Optimization:
+		Level: -O3 (-O0 for Debug)
+		Other: -fsigned-char
+
+	Debugging:
+		Level: -g (-g3 is the same)
+
+	Warnings:
+		-Wall
+		-Werror
+
+	Miscellaneous:
+		-c -fmessage-length=0 -emit-llvm 
+		-m64 / -m32
+		
+		-Weverything if possible
+
+
+Other possible options:
+
+	-fsigned-char 
+	-fsigned-bitfields 
+			 
+	-Wno-c++98-compat
+	-Wno-c++98-compat-pedantic 
+	-Wno-undef
+	-Wno-documentation-unknown-command
+
+Linker options:
+
+	-native
+
+Pragmas:
+
+// [ILG]
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundef"
+
+// [ILG]
+#pragma clang diagnostic pop
+
+// [ILG]
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wpadded"
+
+// [ILG]
+#pragma GCC diagnostic pop
+

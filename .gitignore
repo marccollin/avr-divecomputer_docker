@@ -1,0 +1,29 @@
+# SCons build output and state
+Debug/
+.sconsign.dblite
+*.o
+*.a
+*.elf
+*.hex
+*.bin
+*.map
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*~
+
+# KiCad backups / caches
+kicad/**/*-backups/
+kicad/**/*.bak
+kicad/**/*-bak
+kicad/**/fp-info-cache
+kicad/**/*.kicad_prl
+kicad/**/_autosave-*
+
+# Downloaded library archives (sources are extracted in lib/)
+dld/
+
+# Python
+__pycache__/

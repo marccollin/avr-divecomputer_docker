@@ -1,0 +1,28 @@
+/* 
+ * File:   waterSensor.cpp
+ * Author: collinm
+ * 
+ * Created on 15 avril 2015, 21:16
+ */
+#include <stm32f4xx_hal.h>
+#include "stm32f4xx_hal_gpio.h"
+
+#include "waterSensor.h"
+
+WaterSensor waterSensor;
+
+
+WaterSensor::WaterSensor() 
+{
+}
+
+WaterSensor::~WaterSensor() 
+{
+}
+
+bool WaterSensor::is_wet()
+{
+    //1 = wet, 0= dry
+    return !HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_1)!=0;
+}
+

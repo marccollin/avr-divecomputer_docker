@@ -1,0 +1,52 @@
+#!/bin/bash
+set -e
+
+FATFS_FILE=ff11.zip
+U8GLIB_VERSION=1.17
+U8GLIB_FILE="u8glib-$U8GLIB_VERSION.tar.gz"
+
+function download
+{
+    URL="$1"
+    OUTPUT="$2"
+
+    if [ ! -e "$OUTPUT" ]; then
+	wget -O "$OUTPUT" "$URL"
+    fi
+}
+
+BASE_DIR=$(readlink -f `dirname "$0"`)
+cd "$BASE_DIR"
+
+mkdir -p dld lib
+
+cd dld
+download "http://elm-chan.org/fsw/ff/$FATFS_FILE" "$FATFS_FILE"
+download "https://u8glib.googlecode.com/archive/v$U8GLIB_VERSION.tar.gz" "$U8GLIB_FILE"
+cd ..
+
+git submodule update --init
+
+cd lib
+
+rm -rf fatfs
+mkdir fatfs
+cd fatfs
+unzip -q "$BASE_DIR/dld/$FATFS_FILE"
+rm -- src/diskio.* src/ffconf.h
+rm -f src/integer.h
+
+cd ..
+rm -rf u8glib
+tar xzf "$BASE_DIR/dld/$U8GLIB_FILE"
+mv "u8glib-v$U8GLIB_VERSION" u8glib
+
+cd "$BASE_DIR"
+
+rm -rf system
+mkdir system
+cd system
+
+while read pack; do
+    cp -a "../lib/uos/packages/$pack/." .
+done < ../lib/uos-packs
