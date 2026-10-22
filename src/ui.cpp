@@ -10,7 +10,7 @@ Routes buttons, renders pages and returns home after inactivity.
 
 //Keeps home at stack index zero; all page pointers remain externally owned.
 Ui::Ui(ButtonPanel &button_panel, Page &home_page)
-    : buttons(button_panel), stack(), depth(1), last_press(0)
+    : buttons(button_panel), stack(), page_count(1), last_press(0)
 {
     stack[0] = &home_page;
 }
@@ -18,8 +18,8 @@ Ui::Ui(ButtonPanel &button_panel, Page &home_page)
 //Pushes a page or replaces the top at capacity, then initialises and renders it.
 void Ui::show(Page &page)
 {
-    if (depth < MAX_DEPTH) ++depth;
-    stack[depth - 1] = &page;
+    if (page_count < MAX_DEPTH) ++page_count;
+    stack[page_count - 1] = &page;
     page.on_enter();
     render();
 }
@@ -27,21 +27,21 @@ void Ui::show(Page &page)
 //Pops only above home and redraws without reinitialising the revealed page.
 void Ui::back(void)
 {
-    if (depth > 1) --depth;
+    if (page_count > 1) --page_count;
     render();
 }
 
 //Drops the visible stack to home without invoking editor confirmation.
 void Ui::go_home(void)
 {
-    depth = 1;
+    page_count = 1;
     render();
 }
 
 //Repeats the current page draw for each u8g buffer pass needed by the 128x64 display.
 void Ui::render(void)
 {
-    Page *current = stack[depth - 1];
+    Page *current = stack[page_count - 1];
     u8g_FirstPage(&screen.u8g);
     do {
         current->draw(&screen.u8g);
@@ -56,12 +56,12 @@ void Ui::run_for(uint32_t duration_ms, bool allow_stop)
         ButtonId id;
         if (buttons.poll(id)) {
             last_press = HAL_GetTick();
-            stack[depth - 1]->on_button(*this, id);
+            stack[page_count - 1]->on_button(*this, id);
             render();
         } else {
             //After 10 s idle, discards navigation and unconfirmed edits by returning home.
-            if (depth > 1 && HAL_GetTick() - last_press >= IDLE_TIMEOUT_MS) go_home();
-            if (allow_stop && depth == 1) {
+            if (page_count > 1 && HAL_GetTick() - last_press >= IDLE_TIMEOUT_MS) go_home();
+            if (allow_stop && page_count == 1) {
                 //Home screen idle: STOP mode until the end of the period or a button press.
                 const uint32_t elapsed = HAL_GetTick() - start;
                 if (elapsed < duration_ms) lowPower.stop_for(duration_ms - elapsed, buttons);

@@ -40,7 +40,7 @@ Run these commands from a Linux host with Docker installed:
 
 ```sh
 git clone https://github.com/marccollin/stm32_divecomputer.git
-cd stm32_divecomputer_docker
+cd stm32_divecomputer
 
 docker pull wischner/gcc-arm-none-eabi:1.2.0
 docker build -t stm32_divecomputer .

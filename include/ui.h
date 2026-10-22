@@ -62,7 +62,7 @@ public:
     */
     void go_home(void);
     //Returns true when only the home page remains on the stack.
-    bool at_home(void) const { return depth == 1; }
+    bool at_home(void) const { return page_count == 1; }
     /*
     Renders the current page through the complete u8g paged display loop.
     */
@@ -79,7 +79,7 @@ private:
 
     ButtonPanel &buttons;
     Page *stack[MAX_DEPTH];
-    int depth;
+    int page_count;
     uint32_t last_press;
 };
 
