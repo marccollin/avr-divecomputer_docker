@@ -1,3 +1,7 @@
+/*
+STM32 RTC calendar and backup-domain markers.
+Calendar values and epoch timestamps use UTC without timezone adjustment.
+*/
 #include <assert.h>
 #include <time.h> 
 #include <diag/Trace.h>
@@ -11,6 +15,7 @@
 
 Rtc rtc;
 
+//Configures dividers for the external LSE clock and 24-hour calendar representation.
 Rtc::Rtc(void)
 {
     handle.Init.HourFormat = RTC_HOURFORMAT_24;
@@ -23,6 +28,7 @@ Rtc::Rtc(void)
     handle.Instance = RTC;
 }
 
+//Preserves a marked backup calendar or resets it and starts the external LSE clock.
 bool Rtc::init(void)
 {
     RCC_OscInitTypeDef RCC_OscInitStruct;
@@ -32,6 +38,7 @@ bool Rtc::init(void)
     //Enable access to Backup domain
     HAL_PWR_EnableBkUpAccess();
 
+    //DR0 magic marks an initialised RTC; preserve its calendar across MCU resets.
     if(HAL_RTCEx_BKUPRead(&handle, RTC_BKP_DR0) == RTC_MAGIC) {
 	trace_printf("RTC already initialized, leaving it alone.\n");
 	//After a reset the calendar shadow registers must resync before reading.
@@ -48,10 +55,10 @@ bool Rtc::init(void)
 
     //Enable LSE Oscillator
     RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSE;
-    RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE; /* Mandatory, otherwise the PLL is reconfigured! */
-    RCC_OscInitStruct.LSEState = RCC_LSE_ON; /* External 32.768 kHz clock on OSC_IN/OSC_OUT */
+    RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE; //Mandatory, otherwise the PLL is reconfigured!
+    RCC_OscInitStruct.LSEState = RCC_LSE_ON; //External 32.768 kHz clock on OSC_IN/OSC_OUT
     if (HAL_RCC_OscConfig(&RCC_OscInitStruct) == HAL_OK) {
-        // Connect LSE to RTC
+        //Connect LSE to RTC
         __HAL_RCC_RTC_CLKPRESCALER(RCC_RTCCLKSOURCE_LSE);
         __HAL_RCC_RTC_CONFIG(RCC_RTCCLKSOURCE_LSE);
     }
@@ -80,12 +87,14 @@ bool Rtc::init(void)
     HAL_RTC_SetDate(&handle, &dateStruct, FORMAT_BIN);
     HAL_RTC_SetTime(&handle, &timeStruct, FORMAT_BIN);
 
+    //A reset calendar is unconfirmed in DR1; DR0 then marks hardware initialisation.
     HAL_RTCEx_BKUPWrite(&handle, RTC_BKP_DR1, 0);
     HAL_RTCEx_BKUPWrite(&handle, RTC_BKP_DR0, RTC_MAGIC);
 
     return true;
 }
 
+//Reads time before date to unlock shadow registers, then converts the UTC calendar to epoch seconds.
 time_t Rtc::now(void)
 {
     RTC_DateTypeDef dateStruct;
@@ -107,6 +116,7 @@ time_t Rtc::now(void)
     return mktime(&timeinfo);
 }
 
+//Converts UTC epoch seconds to the calendar and records whether a user confirmed the time.
 void Rtc::set(time_t t, bool confirmed)
 {
     struct tm tm_utc;
@@ -127,10 +137,61 @@ void Rtc::set(time_t t, bool confirmed)
 
     HAL_RTC_SetTime(&handle, &timeStruct, FORMAT_BIN);
     HAL_RTC_SetDate(&handle, &dateStruct, FORMAT_BIN);
+    //DR1 distinguishes user-confirmed time from an estimate restored from saved tissues.
     HAL_RTCEx_BKUPWrite(&handle, RTC_BKP_DR1, confirmed ? TIME_CONFIRMED : 0);
 }
 
 bool Rtc::needs_setting(void)
 {
     return HAL_RTCEx_BKUPRead(&handle, RTC_BKP_DR1) != TIME_CONFIRMED;
+}
+
+u32 Rtc::ms_of_day(void)
+{
+    RTC_TimeTypeDef timeStruct;
+    RTC_DateTypeDef dateStruct;
+    HAL_RTC_GetTime(&handle, &timeStruct, FORMAT_BIN);
+    //Reading the date releases the shadow register lock taken by GetTime.
+    HAL_RTC_GetDate(&handle, &dateStruct, FORMAT_BIN);
+
+    //SubSeconds counts down from PREDIV_S to 0 within each second.
+    const u32 prediv_s = handle.Init.SynchPrediv;
+    const u32 sub_ms = (prediv_s - timeStruct.SubSeconds) * 1000u / (prediv_s + 1u);
+    return ((timeStruct.Hours * 60u + timeStruct.Minutes) * 60u + timeStruct.Seconds) * 1000u + sub_ms;
+}
+
+void Rtc::start_wakeup(u32 ms)
+{
+    //LSE/16 = 2048 Hz; the 16-bit counter fires after counter + 1 periods.
+    u32 counter = ms * 2048u / 1000u;
+    if (counter < 1u) counter = 1u;
+    if (counter > 0x10000u) counter = 0x10000u;
+    HAL_RTCEx_SetWakeUpTimer_IT(&handle, counter - 1u, RTC_WAKEUPCLOCK_RTCCLK_DIV16);
+    HAL_NVIC_SetPriority(RTC_WKUP_IRQn, 5, 0);
+    HAL_NVIC_EnableIRQ(RTC_WKUP_IRQn);
+}
+
+void Rtc::stop_wakeup(void)
+{
+    HAL_RTCEx_DeactivateWakeUpTimer(&handle);
+    __HAL_RTC_WAKEUPTIMER_EXTI_CLEAR_FLAG();
+}
+
+void Rtc::resync(void)
+{
+    __HAL_RTC_WRITEPROTECTION_DISABLE(&handle);
+    HAL_RTC_WaitForSynchro(&handle);
+    __HAL_RTC_WRITEPROTECTION_ENABLE(&handle);
+}
+
+void Rtc::wakeup_irq(void)
+{
+    HAL_RTCEx_WakeUpTimerIRQHandler(&handle);
+}
+
+extern "C" void RTC_WKUP_IRQHandler(void);
+
+extern "C" void RTC_WKUP_IRQHandler(void)
+{
+    rtc.wakeup_irq();
 }

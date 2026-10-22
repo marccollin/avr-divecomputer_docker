@@ -1,3 +1,6 @@
+/*
+Live dive and surface page backed by the shared DiveView/DiveScreen renderer.
+*/
 #include "mainPage.h"
 #include "rtc.h"
 
@@ -6,6 +9,7 @@ MainPage::MainPage(DiveController &dive_controller)
 {
 }
 
+//Builds the shared DiveView from live metrics and the first required stop, then formats it.
 void MainPage::update(float pressure_bar, float temperature_c, time_t now)
 {
     const DecoPlan &plan = dive.plan();
@@ -30,6 +34,7 @@ void MainPage::update(float pressure_bar, float temperature_c, time_t now)
     screen.format(v);
 }
 
+//Allows B2 demos only at surface; other available paths open the dive-aware menu.
 void MainPage::on_button(Ui &ui, ButtonId id)
 {
     if (id == ButtonId::Second && demo != nullptr && !dive.in_dive()) {

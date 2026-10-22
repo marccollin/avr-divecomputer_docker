@@ -14,6 +14,15 @@ using namespace std;
 SystemClock systemClock;
 
 SystemClock::SystemClock() {
+    configure();
+
+    // Handle used by setDate/setTime/getUnixTimestamp; the RTC itself is set up by Rtc::init().
+    RtcHandle.Instance = RTC;
+    RtcHandle.Init.HourFormat = RTC_HOURFORMAT_24;
+}
+
+//Runs at boot and after STOP mode, which leaves the MCU on the 16 MHz HSI with HSE and PLL off.
+void SystemClock::configure() {
     RCC_ClkInitTypeDef RCC_ClkInitStruct;
     RCC_OscInitTypeDef RCC_OscInitStruct;
 
@@ -53,10 +62,6 @@ SystemClock::SystemClock() {
     RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
     RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
     HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
-
-    // Handle used by setDate/setTime/getUnixTimestamp; the RTC itself is set up by Rtc::init().
-    RtcHandle.Instance = RTC;
-    RtcHandle.Init.HourFormat = RTC_HOURFORMAT_24;
 }
 
 

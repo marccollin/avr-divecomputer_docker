@@ -40,4 +40,14 @@ protected:
 
 extern TimerWheel main_timer;
 
+/*
+Configures SysTick for a 1 ms tick from HCLK/8 at the highest priority.
+Called at boot and again after STOP mode, once the system clock is restored.
+*/
+void systick_init(void);
+/*
+Adds ms to the HAL tick; used after STOP mode, where SysTick does not run.
+*/
+void tick_advance(u32 ms);
+
 #endif

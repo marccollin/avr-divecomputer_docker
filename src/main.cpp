@@ -55,13 +55,13 @@ int main(void) {
     Ui ui(buttonPanel, mainPage);
 #ifdef DEBUG
     HAL_EnableDBGSleepMode();
+    //Keeps the debugger connected in STOP mode (clocks stay on, so savings are lower).
+    HAL_DBGMCU_EnableDBGStopMode();
 #endif
     enable_peripherals();
     const bool clock_lost = rtc.init();
 
-    SysTick_Config(SystemCoreClock / 8 / 1000);
-    __HAL_CORTEX_SYSTICKCLK_CONFIG(SYSTICK_CLKSOURCE_HCLK_DIV8);
-    NVIC_SetPriority(SysTick_IRQn, 0);
+    systick_init();
 
     buttonPanel.init();
 
@@ -93,11 +93,8 @@ int main(void) {
         mainPage.update(pressure, pressureSensor.get_temperature_celcius(), rtc.now());
         ui.render();
 
-        //Sleep until the next interrupt, to save power.
-        //__WFI();
-
-        //1 s sampling in the water, 10 s at the surface.
-        const uint32_t delay_ms = (dive.in_dive() || waterSensor.is_wet()) ? 1000 : 10000;
-        ui.run_for(delay_ms);
+        //1 s sampling in the water; 10 s at the surface, in STOP mode while the home page is shown.
+        const bool surface = !dive.in_dive() && !waterSensor.is_wet();
+        ui.run_for(surface ? 10000 : 1000, surface);
     }
 }

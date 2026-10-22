@@ -1,3 +1,6 @@
+/*
+SD-card storage of tissue pressures, gradient-factor anchor and UTC timestamp.
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -12,13 +15,15 @@ TissueStore tissueStore;
 namespace {
 const char *FILE_NAME = "tissue.txt";
 const char *TMP_NAME = "tissue.tmp";
-const int VERSION = 1;
+const int VERSION = 1; //On-disk format version, currently 1.
 
+//Returns whether FatFs accepted the complete null-terminated text line.
 bool write_line(FIL &f, const char *line)
 {
     return f_puts(line, &f) >= 0;
 }
 
+//Serialises a named pressure array in bar to five decimal places.
 bool write_array(FIL &f, const char *key, const float *v, int n)
 {
     char line[24];
@@ -30,6 +35,7 @@ bool write_array(FIL &f, const char *key, const float *v, int n)
     return write_line(f, "\n");
 }
 
+//Parses a matching named array; rejects missing or out-of-range pressures outside 0..20 bar.
 bool read_array(char *line, const char *key, float *v, int n)
 {
     const size_t len = strlen(key);
@@ -45,13 +51,18 @@ bool read_array(char *line, const char *key, float *v, int n)
 }
 }
 
+//Lazily mounts the SD filesystem and caches successful mounting.
 bool TissueStore::mount()
 {
     if (!mounted_) mounted_ = f_mount(&sdcard_ff, "", 1) == FR_OK;
     return mounted_;
 }
 
-//Writes a temporary file then renames it, so a power loss never leaves a half-written tissue.txt.
+/*
+Stages complete data in tissue.tmp before replacing tissue.txt by rename.
+This avoids a half-written final file, but unlink then rename is not fully atomic:
+a power loss between those calls can leave no tissue.txt.
+*/
 bool TissueStore::save(const TissueState &t, float gf_anchor, time_t timestamp)
 {
     if (!mount()) return false;
@@ -74,6 +85,7 @@ bool TissueStore::save(const TissueState &t, float gf_anchor, time_t timestamp)
     return f_rename(TMP_NAME, FILE_NAME) == FR_OK;
 }
 
+//Parses into temporary state and publishes outputs only after version and array validation.
 bool TissueStore::load(TissueState &t, float &gf_anchor, time_t &timestamp)
 {
     if (!mount()) return false;
@@ -103,6 +115,7 @@ bool TissueStore::load(TissueState &t, float &gf_anchor, time_t &timestamp)
     return true;
 }
 
+//Reuses full-record validation before returning a saved UTC timestamp.
 bool TissueStore::saved_time(time_t &timestamp)
 {
     TissueState t;

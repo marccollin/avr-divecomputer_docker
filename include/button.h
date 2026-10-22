@@ -16,6 +16,8 @@ public:
 	}
 	void change_event(void);
 	bool take_press(void);
+	//Returns true when a press is waiting, without consuming it.
+	bool pending(void) const { return press_pending; }
 protected:
 	const pin_t &pin;
 	volatile bool press_pending;

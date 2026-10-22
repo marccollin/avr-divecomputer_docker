@@ -1,14 +1,21 @@
+/*
+Full-screen page interface and bounded navigation stack.
+Routes buttons, renders pages and returns home after inactivity.
+*/
 #include <stm32f4xx_hal.h>
 
 #include "screen.h"
 #include "ui.h"
+#include "lowPower.h"
 
+//Keeps home at stack index zero; all page pointers remain externally owned.
 Ui::Ui(ButtonPanel &button_panel, Page &home_page)
     : buttons(button_panel), stack(), depth(1), last_press(0)
 {
     stack[0] = &home_page;
 }
 
+//Pushes a page or replaces the top at capacity, then initialises and renders it.
 void Ui::show(Page &page)
 {
     if (depth < MAX_DEPTH) ++depth;
@@ -17,18 +24,21 @@ void Ui::show(Page &page)
     render();
 }
 
+//Pops only above home and redraws without reinitialising the revealed page.
 void Ui::back(void)
 {
     if (depth > 1) --depth;
     render();
 }
 
+//Drops the visible stack to home without invoking editor confirmation.
 void Ui::go_home(void)
 {
     depth = 1;
     render();
 }
 
+//Repeats the current page draw for each u8g buffer pass needed by the 128x64 display.
 void Ui::render(void)
 {
     Page *current = stack[depth - 1];
@@ -38,7 +48,8 @@ void Ui::render(void)
     } while (u8g_NextPage(&screen.u8g));
 }
 
-void Ui::run_for(uint32_t duration_ms)
+//Polls buttons while waiting with unsigned HAL ticks and a 10 ms idle delay.
+void Ui::run_for(uint32_t duration_ms, bool allow_stop)
 {
     const uint32_t start = HAL_GetTick();
     while (HAL_GetTick() - start < duration_ms) {
@@ -48,8 +59,16 @@ void Ui::run_for(uint32_t duration_ms)
             stack[depth - 1]->on_button(*this, id);
             render();
         } else {
+            //After 10 s idle, discards navigation and unconfirmed edits by returning home.
             if (depth > 1 && HAL_GetTick() - last_press >= IDLE_TIMEOUT_MS) go_home();
-            HAL_Delay(10);
+            if (allow_stop && depth == 1) {
+                //Home screen idle: STOP mode until the end of the period or a button press.
+                const uint32_t elapsed = HAL_GetTick() - start;
+                if (elapsed < duration_ms) lowPower.stop_for(duration_ms - elapsed, buttons);
+            } else {
+                //Sleep until the next interrupt: a button EXTI (external interrupt)wakes immediately, SysTick every 1 ms.
+                __WFI();
+            }
         }
     }
 }

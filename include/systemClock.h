@@ -15,6 +15,8 @@
 class SystemClock {
 public:
     SystemClock();
+    //Starts HSE and the PLL and switches the system clock to 168 MHz.
+    void configure();
     time_t getUnixTimestamp();
     RTC_DateTypeDef getDate();
     RTC_TimeTypeDef getTime();

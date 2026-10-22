@@ -1,3 +1,7 @@
+/*
+Hardware-independent ZHL-16C tissue loading and gradient-factor decompression.
+Pressures are absolute bar; internal integration uses minutes.
+*/
 #include <math.h>
 
 #include "buhlmannModel.h"
@@ -5,9 +9,12 @@
 
 namespace {
 
-const int N = TissueState::COUNT;
+const int N = TissueState::COUNT; //Compartment count, 16.
 
-//ZHL-16C coefficients (compartment 1b).
+/*
+ZHL-16C coefficients using compartment 1b.
+Half-times are minutes; a coefficients are bar; b coefficients are dimensionless.
+*/
 const float N2_HALF[N] = {5.0, 8.0, 12.5, 18.5, 27.0, 38.3, 54.3, 77.0,
     109.0, 146.0, 187.0, 239.0, 305.0, 390.0, 498.0, 635.0};
 const float N2_A[N] = {1.1696, 1.0, 0.8618, 0.7562, 0.62, 0.5043, 0.441, 0.4,
@@ -21,13 +28,15 @@ const float HE_A[N] = {1.6189, 1.383, 1.1919, 1.0458, 0.922, 0.8205, 0.7305, 0.6
 const float HE_B[N] = {0.4770, 0.5747, 0.6527, 0.7223, 0.7582, 0.7957, 0.8279, 0.8553,
     0.8757, 0.8903, 0.8997, 0.9073, 0.9122, 0.9171, 0.9217, 0.9267};
 
-const float LN2 = 0.69314718f;
-const float CEILING_STEP_BAR = 0.01f;
-const int MAX_STOP_MIN = 255;
-const int MAX_TOTAL_MIN = 999;
+const float LN2 = 0.69314718f; //Natural logarithm of two, dimensionless.
+const float CEILING_STEP_BAR = 0.01f; //Ceiling-search pressure increment, bar.
+const int MAX_STOP_MIN = 255; //Per-stop simulation cap, minutes; fits uint8_t.
+const int MAX_TOTAL_MIN = 999; //Total stop-time simulation cap, minutes.
 
+//Returns the configured 0.0627 bar water-vapour correction to inspired pressure.
 float wv() { return GlobalConstants::water_vapor_pressure; }
 
+//Applies the Schreiner equation to one gas: pressures in bar, rate in bar/minute, t in minutes.
 void schreiner_one(float &p, float palv0, float rate, float k, float t)
 {
     p = palv0 + rate * (t - 1.0f / k) - (palv0 - p - rate / k) * expf(-k * t);
@@ -35,6 +44,7 @@ void schreiner_one(float &p, float palv0, float rate, float k, float t)
 
 }
 
+//Precomputes inverse-minute uptake rates and one-minute decay factors for all compartments.
 BuhlmannModel::BuhlmannModel()
     : tissues(), p_surface_(GlobalConstants::initial_Ambient_Pressure), gf_anchor_(0.0f)
 {
@@ -47,6 +57,7 @@ BuhlmannModel::BuhlmannModel()
     reset_to_surface(p_surface_);
 }
 
+//Saturates each nitrogen compartment at inspired air pressure and clears helium and anchor.
 void BuhlmannModel::reset_to_surface(float p_surface)
 {
     p_surface_ = p_surface;
@@ -58,12 +69,14 @@ void BuhlmannModel::reset_to_surface(float p_surface)
     }
 }
 
+//Integrates linear inspired-pressure changes separately for nitrogen and helium.
 void BuhlmannModel::schreiner(TissueState &t, float p_start, float p_end, float dt_min,
                               const GasMix &gas) const
 {
     if (dt_min <= 0.0f) return;
     const float fn2 = gas.n2();
     const float fhe = gas.he;
+    //Subtracts 0.0627 bar water vapour before applying inert-gas fractions.
     const float palv = p_start - wv();
     const float rate = (p_end - p_start) / dt_min;
     for (int i = 0; i < N; ++i) {
@@ -72,6 +85,7 @@ void BuhlmannModel::schreiner(TissueState &t, float p_start, float p_end, float 
     }
 }
 
+//Uses cached exponential factors for one minute at constant ambient pressure.
 void BuhlmannModel::constant_minute(TissueState &t, float p_amb, const GasMix &gas) const
 {
     const float pn2 = (p_amb - wv()) * gas.n2();
@@ -82,31 +96,36 @@ void BuhlmannModel::constant_minute(TissueState &t, float p_amb, const GasMix &g
     }
 }
 
+//Converts the public duration from seconds to minutes before Schreiner integration.
 void BuhlmannModel::update(float p_start, float p_end, float dt_s, const GasMix &gas)
 {
     schreiner(tissues, p_start, p_end, dt_s / 60.0f, gas);
 }
 
-//Highest tolerated ambient pressure over all compartments for a gradient factor.
+//Returns the deepest required ambient pressure among all compartments for the given GF.
 float BuhlmannModel::tolerated(const TissueState &t, float gf)
 {
     float worst = 0.0f;
     for (int i = 0; i < N; ++i) {
         const float pt = t.n2[i] + t.he[i];
         if (pt <= 0.0f) continue;
+        //Weights Buhlmann a (bar) and b (dimensionless) by nitrogen and helium partial pressures.
         const float a = (N2_A[i] * t.n2[i] + HE_A[i] * t.he[i]) / pt;
         const float b = (N2_B[i] * t.n2[i] + HE_B[i] * t.he[i]) / pt;
+        //GF-adjusted tolerated pressure: (Pt - a*gf)/(gf/b + 1 - gf), in absolute bar.
         const float p = (pt - a * gf) / (gf / b + 1.0f - gf);
         if (p > worst) worst = p;
     }
     return worst;
 }
 
+//Compares the worst compartment limit with ambient pressure using a small bar tolerance.
 bool BuhlmannModel::tolerates(const TissueState &t, float p_amb, float gf)
 {
     return tolerated(t, gf) <= p_amb + 0.0001f;
 }
 
+//Interpolates GF linearly in pressure from GF low at the deepest first stop to GF high at surface.
 float BuhlmannModel::gf_at(float p, float anchor, const DecoSettings &s) const
 {
     if (anchor <= p_surface_) return s.gf_high;
@@ -124,12 +143,14 @@ float BuhlmannModel::gf_low_first_stop(const TissueState &t, const DecoSettings 
     return p_surface_ + stop * s.bar_per_m;
 }
 
+//Retains the deepest first-stop pressure reached; the GF anchor never shallows during a dive.
 void BuhlmannModel::track_anchor(const DecoSettings &s)
 {
     const float first = gf_low_first_stop(tissues, s);
     if (first > gf_anchor_) gf_anchor_ = first;
 }
 
+//Searches in 0.01 bar increments from surface until interpolated GF is tolerated.
 float BuhlmannModel::ceiling_m(const DecoSettings &s) const
 {
     const float limit = tolerated(tissues, s.gf_low);
@@ -141,6 +162,7 @@ float BuhlmannModel::ceiling_m(const DecoSettings &s) const
     return depth > 0.0f ? depth : 0.0f;
 }
 
+//Simulates copied tissues in one-minute steps and tests surface tolerance at GF high.
 int BuhlmannModel::ndl_min(float p_amb, const GasMix &gas, const DecoSettings &s) const
 {
     TissueState t = tissues;
@@ -151,6 +173,7 @@ int BuhlmannModel::ndl_min(float p_amb, const GasMix &gas, const DecoSettings &s
     return NDL_MAX;
 }
 
+//Simulates ascent and whole-minute stops on copied tissues, with richer usable gas switches.
 void BuhlmannModel::plan(float p_amb, const GasList &gases, int current_gas,
                          const DecoSettings &s, DecoPlan &out)
 {
@@ -169,6 +192,7 @@ void BuhlmannModel::plan(float p_amb, const GasList &gases, int current_gas,
         if (out.tts_min < 0) out.tts_min = 0;
         return;
     }
+    //Uses the deepest first stop as the GF-low anchor, including the saved dive anchor.
     const float anchor = first > gf_anchor_ ? first : gf_anchor_;
     float stop_d = roundf((first - p_surface_) / s.bar_per_m);
 

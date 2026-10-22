@@ -1,9 +1,16 @@
+/*
+Fixed dive examples rendered by the same DiveScreen as the live MainPage.
+*/
 #include <stdio.h>
 
 #include "demoPage.h"
 
 namespace {
-//in_dive, pressure, depth, max, time_s, ndl, ceiling, has_stop, stop_depth, stop_min, tts, gas, temp, clock_set, now
+/*
+DiveView field order: dive flag, bar, depth/max metres, time seconds, NDL minutes,
+ceiling metres, stop flag, stop metres/minutes, TTS minutes, gas fractions,
+Celsius, clock-confirmed flag and UTC epoch seconds.
+*/
 const DiveView EXAMPLES[] = {
     //No-deco dive on air
     {true, 2.85f, 18.4f, 21.2f, 12 * 60 + 34, 21, 0.0f, false, 0, 0, 0, {0.21f, 0.0f}, 19.0f, true, 0},
@@ -16,7 +23,7 @@ const DiveView EXAMPLES[] = {
     //Trimix deco stop
     {true, 3.05f, 21.0f, 55.4f, 41 * 60 + 2, 0, 18.6f, true, 21, 2, 47, {0.18f, 0.45f}, 11.0f, true, 0},
 };
-const int EXAMPLE_COUNT = sizeof(EXAMPLES) / sizeof(EXAMPLES[0]);
+const int EXAMPLE_COUNT = sizeof(EXAMPLES) / sizeof(EXAMPLES[0]); //Example count; valid indices are 0..EXAMPLE_COUNT-1.
 }
 
 void DemoPage::on_enter()
@@ -25,6 +32,7 @@ void DemoPage::on_enter()
     load();
 }
 
+//Formats a fixed DiveView through the live screen renderer and adds its numbered demo tag.
 void DemoPage::load(void)
 {
     char tag[24];

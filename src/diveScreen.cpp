@@ -1,9 +1,14 @@
+/*
+Shared data view and 128x64 dive/surface display renderer.
+Used by live MainPage and fixed-data DemoPage without duplicating layout.
+*/
 #include <stdio.h>
 
 #include "configComputer.h"
 #include "diveScreen.h"
 #include "units.h"
 
+//Builds four bounded text lines from the shared live/demo snapshot and display-unit setting.
 void DiveScreen::format(const DiveView &v)
 {
     const unitSystem sys = configComputer.get_system_unit();
@@ -37,6 +42,7 @@ void DiveScreen::format(const DiveView &v)
         snprintf(line4, sizeof(line4), "%s  %s  SET TIME", gas, temp);
     } else {
         struct tm tm_now;
+        //Shows UTC directly, with no timezone or daylight-saving adjustment.
         gmtime_r(&v.now, &tm_now);
         snprintf(line4, sizeof(line4), "%s  %s  %02d:%02d", gas, temp, tm_now.tm_hour, tm_now.tm_min);
     }
@@ -47,8 +53,10 @@ void DiveScreen::set_tag(const char *text)
     snprintf(tag, sizeof(tag), "%s", text != nullptr ? text : "");
 }
 
+//Places four text baselines and an optional inverted tag within the 128x64 display.
 void DiveScreen::draw(u8g_t *u8g) const
 {
+    //The u8g colour index is a grey level, 0..3: dark through brightest.
     u8g_SetColorIndex(u8g, 3);
     u8g_SetFont(u8g, u8g_font_helvB14);
     u8g_DrawStr(u8g, 2, 16, line1);

@@ -96,6 +96,41 @@ bool TimerWheel::cancel(TimerItem *item)
 }
 
 
+//HAL tick in ms; replaces the HAL's private counter so tick_advance() can correct it after STOP mode.
+static volatile uint32_t tick_ms;
+
+void HAL_IncTick(void)
+{
+	tick_ms++;
+}
+
+uint32_t HAL_GetTick(void)
+{
+	return tick_ms;
+}
+
+//Also called by HAL_RCC_ClockConfig(), so every clock change keeps the same SysTick setup.
+HAL_StatusTypeDef HAL_InitTick(uint32_t)
+{
+	systick_init();
+	return HAL_OK;
+}
+
+void systick_init(void)
+{
+	SysTick_Config(HAL_RCC_GetHCLKFreq() / 8 / 1000);
+	__HAL_CORTEX_SYSTICKCLK_CONFIG(SYSTICK_CLKSOURCE_HCLK_DIV8);
+	NVIC_SetPriority(SysTick_IRQn, 0);
+}
+
+void tick_advance(u32 ms)
+{
+	const uint32_t primask = __get_PRIMASK();
+	__disable_irq();
+	tick_ms += ms;
+	__set_PRIMASK(primask);
+}
+
 extern "C" void
 SysTick_Handler(void)
 {

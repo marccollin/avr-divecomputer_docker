@@ -78,7 +78,7 @@ env.Alias('attach', 'attach_phony')
 def where_action(target, source, env):
     import subprocess
     nm = subprocess.check_output([toolchain_prefix + 'arm-none-eabi-nm', str(source[0])]).decode()
-    tick = next((l.split()[0] for l in nm.splitlines() if l.endswith(' uwTick')), None)
+    tick = next((l.split()[0] for l in nm.splitlines() if l.endswith((' uwTick', ' tick_ms'))), None)
     cmds = ['halt', 'reg pc', 'reg lr', 'reg sp', 'reg xPSR',
             'mdw 0xE000EDF0',          # DHCSR
             'mdw 0xE000E010 3',        # SysTick CSR / RVR / CVR

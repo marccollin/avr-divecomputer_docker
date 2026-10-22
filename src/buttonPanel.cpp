@@ -21,6 +21,15 @@ void ButtonPanel::init(void)
     HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 }
 
+bool ButtonPanel::pending(void) const
+{
+    for (unsigned i = 0; i < NB_BUTTONS; ++i) {
+        if (buttons[i]->pending()) return true;
+    }
+    return false;
+}
+
+//Collect presses that were already recorded, presses have been detected by interrupts
 bool ButtonPanel::poll(ButtonId &id)
 {
     for (unsigned i = 0; i < NB_BUTTONS; ++i) {

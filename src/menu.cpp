@@ -1,3 +1,7 @@
+/*
+Three-button menu navigation and staged numeric or choice editors.
+Provides gas, decompression, clock and display-setting pages.
+*/
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
@@ -8,12 +12,14 @@
 #include "units.h"
 
 namespace {
-const int ROW_H = 10;
-const int TITLE_H = 11;
-const int MENU_ROWS = 5;
+const int ROW_H = 10; //Row height, pixels.
+const int TITLE_H = 11; //Title area height, pixels.
+const int MENU_ROWS = 5; //Visible rows below the title on a 128x64 display.
 
+//Draws the title and separator across the 128-pixel-wide display.
 void draw_title(u8g_t *u8g, const char *title)
 {
+    //Uses u8g grey indices 0..3; 3 is bright, 2 dimmed and 0 dark.
     u8g_SetColorIndex(u8g, 3);
     u8g_DrawStr(u8g, 2, 0, title);
     u8g_DrawHLine(u8g, 0, TITLE_H - 2, 128);
@@ -33,10 +39,13 @@ void draw_row(u8g_t *u8g, int y, const char *label, const char *value, bool high
     }
 }
 
+//Rounds a fractional value to the nearest whole percent.
 int percent(float fraction) { return (int) (fraction * 100.0f + 0.5f); }
 
+//Applies Gregorian leap-year rules, including century exceptions.
 bool is_leap(int y) { return (y % 4 == 0 && y % 100 != 0) || y % 400 == 0; }
 
+//Returns month length for year and month 1..12, including leap-day adjustment.
 int days_in_month(int year, int month)
 {
     static const int DAYS[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
@@ -46,11 +55,12 @@ int days_in_month(int year, int month)
 
 const char *const WATER_NAMES[] = {"FRESH", "SALT"};
 const char *const UNIT_NAMES[] = {"METRIC", "IMPERIAL"};
-const char *const LANG_NAMES[] = {"FRANCAIS", "ENGLISH"}; // order of enum lang { fr, eng }
-} // namespace
+const char *const LANG_NAMES[] = {"FRANCAIS", "ENGLISH"}; //Matches enum lang order: French, English.
+} //Anonymous namespace.
 
-// ---------------------------------------------------------------- MenuPage
+//Scrollable menu navigation.
 
+//Maps B1 left to next, B2 middle to back and B3 right to select, keeping selection visible.
 void MenuPage::on_button(Ui &ui, ButtonId id)
 {
     const int n = count();
@@ -75,6 +85,7 @@ void MenuPage::on_button(Ui &ui, ButtonId id)
     if (selected >= top + MENU_ROWS) top = selected - MENU_ROWS + 1;
 }
 
+//Draws up to five rows and splits each tab-delimited label into name and right-aligned value.
 void MenuPage::draw(u8g_t *u8g)
 {
     u8g_SetFont(u8g, u8g_font_helvR08);
@@ -89,7 +100,7 @@ void MenuPage::draw(u8g_t *u8g)
     for (int row = 0; row < MENU_ROWS && top + row < n; ++row) {
         const int i = top + row;
         label(i, buf, sizeof(buf));
-        //A tab separates the item name from its current value (right aligned).
+        //The tab character '\t' separates the name from its right-aligned value.
         char *value = strchr(buf, '\t');
         if (value != nullptr) *value++ = '\0';
         draw_row(u8g, TITLE_H + row * ROW_H, buf, value, i == selected);
@@ -97,8 +108,9 @@ void MenuPage::draw(u8g_t *u8g)
     u8g_SetFontPosBaseline(u8g);
 }
 
-// ---------------------------------------------------------------- EditPage
+//Staged field editing.
 
+//Applies dynamic per-field bounds, including dependent gas fractions and calendar dates.
 void EditPage::clamp(void)
 {
     for (int i = 0; i < count; ++i) {
@@ -107,6 +119,7 @@ void EditPage::clamp(void)
     }
 }
 
+//Wraps B1 increments/B2 decrements; B3 advances fields and applies only after the last.
 void EditPage::on_button(Ui &ui, ButtonId id)
 {
     EditField &f = fields[field];
@@ -133,6 +146,7 @@ void EditPage::on_button(Ui &ui, ButtonId id)
     clamp();
 }
 
+//Draws choice names or scaled numbers and optional dimmed context information.
 void EditPage::draw(u8g_t *u8g)
 {
     u8g_SetFont(u8g, u8g_font_helvR08);
@@ -161,27 +175,33 @@ void EditPage::draw(u8g_t *u8g)
     u8g_SetFontPosBaseline(u8g);
 }
 
-// ---------------------------------------------------------------- concrete pages
+//Concrete gas, dive and system pages.
 
 namespace {
 
 DiveController *dive = nullptr;
 
+//Builds an integer field with inclusive bounds, positive step and optional unit suffix.
 EditField number(const char *label, int value, int min, int max, int step, const char *suffix = nullptr)
 {
     EditField f = {label, value, min, max, step, nullptr, 0, suffix};
     return f;
 }
 
+//Builds a named choice field with zero-based indices 0..n-1.
 EditField choice(const char *label, int value, const char *const *names, int n)
 {
     EditField f = {label, value, 0, n - 1, 1, names, 0, nullptr};
     return f;
 }
 
-//MIX > MIX n > EDIT  /  MIX > ADD MIX
+/*
+Stages oxygen/helium percentages for an existing gas or a new gas.
+The helium upper bound tracks the selected oxygen fraction.
+*/
 class MixEditPage final : public EditPage {
 public:
+    //Copies gas_index into staged percentage fields; -1 starts a new EAN32 mixture.
     void open(Ui &ui, int gas_index)
     {
         index = gas_index;
@@ -194,10 +214,12 @@ public:
         ui.show(*this);
     }
 protected:
+    //Limits helium so oxygen plus helium cannot exceed 100 percent.
     int max_for(int i) const override
     {
         return i == 1 ? 100 - fields[0].value : fields[i].max;
     }
+    //Displays MOD from ppO2 divided by oxygen fraction, converted from bar to depth.
     void info(char *buf, size_t len) const override
     {
         const DecoSettings &s = dive->settings();
@@ -209,6 +231,7 @@ protected:
         snprintf(buf, len, "MOD %s (PPO2 %d.%d)", depth, (int) (ppo2 * 10.0f + 0.5f) / 10,
                  (int) (ppo2 * 10.0f + 0.5f) % 10);
     }
+    //Converts confirmed percentages to fractions and adds or updates the selected gas.
     void apply(Ui &ui) override
     {
         const GasMix g = {fields[0].value / 100.0f, fields[1].value / 100.0f};
@@ -217,8 +240,8 @@ protected:
             ui.back();
         } else {
             dive->gases().set(index, g);
-            ui.back(); //action menu
-            ui.back(); //mix list
+            ui.back(); //Returns to the action menu.
+            ui.back(); //Returns to the mix list.
         }
     }
 private:
@@ -226,9 +249,12 @@ private:
 };
 MixEditPage mixEdit;
 
-//MIX > MIX n
+/*
+Offers use, edit and optional delete actions for a surface-selected gas.
+*/
 class MixActionMenu final : public MenuPage {
 public:
+    //Stores gas_index and pushes its action menu onto the page stack.
     void open(Ui &ui, int gas_index)
     {
         index = gas_index;
@@ -242,6 +268,7 @@ protected:
         static const char *const NAMES[] = {"USE FOR DIVE", "EDIT", "DELETE"};
         snprintf(buf, len, "%s", NAMES[i]);
     }
+    //Uses the gas, opens its editor or deletes it; bottom gas has no delete action.
     void select(Ui &ui, int i) override
     {
         if (i == 0) {
@@ -259,20 +286,25 @@ private:
 };
 MixActionMenu mixAction;
 
-//MIX: list of gases. During a dive, selecting a mix switches to it.
+/*
+Lists carried gases and switches directly during a dive.
+At the surface, opens gas actions or offers adding a gas within capacity.
+*/
 class MixListMenu final : public MenuPage {
 public:
     MixListMenu() { snprintf(title, sizeof(title), "MIX"); }
 protected:
+    //Offers a new-gas row only at the surface and below the five-gas capacity.
     bool can_add() const
     {
         return !dive->in_dive() && dive->gases().count() < GasList::MAX_GASES;
     }
     int count() const override { return dive->gases().count() + (can_add() ? 1 : 0); }
+    //Builds a tab-delimited gas label and marks the active gas with an asterisk.
     void label(int i, char *buf, size_t len) const override
     {
         const GasList &gases = dive->gases();
-        if (i >= gases.count()) { //maybe put a gas limit
+        if (i >= gases.count()) { //The extra row adds a gas; can_add enforces capacity.
             snprintf(buf, len, "ADD MIX");
             return;
         }
@@ -280,6 +312,7 @@ protected:
         units::format_gas(gases.get(i), name, sizeof(name));
         snprintf(buf, len, "MIX %d\t%s%s", i + 1, name, i == gases.active_index() ? " *" : "");
     }
+    //Opens add/actions at surface or switches gas and returns home during a dive.
     void select(Ui &ui, int i) override
     {
         if (i >= dive->gases().count()) {
@@ -294,9 +327,12 @@ protected:
 };
 MixListMenu mixList;
 
-//DIVE > GF
+/*
+Stages gradient factors as percentages and enforces GF high >= GF low.
+*/
 class GfEditPage final : public EditPage {
 public:
+    //Copies current fractional gradient factors into staged whole-percent fields.
     void open(Ui &ui)
     {
         snprintf(title, sizeof(title), "GRADIENT FACTORS");
@@ -307,6 +343,7 @@ public:
     }
 protected:
     int min_for(int i) const override { return i == 1 ? fields[0].value : fields[i].min; }
+    //Converts confirmed percentages back to fractional gradient factors.
     void apply(Ui &ui) override
     {
         dive->settings().gf_low = fields[0].value / 100.0f;
@@ -316,9 +353,12 @@ protected:
 };
 GfEditPage gfEdit;
 
-//DIVE > SALINITY
+/*
+Stages water type and updates the metric pressure/depth conversion on confirmation.
+*/
 class SalinityEditPage final : public EditPage {
 public:
+    //Stages the configured fresh/salt water choice without changing active settings.
     void open(Ui &ui)
     {
         snprintf(title, sizeof(title), "SALINITY");
@@ -327,6 +367,7 @@ public:
         ui.show(*this);
     }
 protected:
+    //Commits water type and refreshes bar per metre from the configured hydrostatic factor.
     void apply(Ui &ui) override
     {
         configComputer.set_water_type(static_cast<waterType>(fields[0].value));
@@ -336,9 +377,12 @@ protected:
 };
 SalinityEditPage salinityEdit;
 
-// DIVE > PPO2
+/*
+Stages bottom and deco ppO2 limits in tenths of a bar.
+*/
 class Ppo2EditPage final : public EditPage {
 public:
+    //Stages ppO2 limits as integers 10..16 displayed as 1.0..1.6 bar.
     void open(Ui &ui)
     {
         snprintf(title, sizeof(title), "PPO2 MAX");
@@ -350,6 +394,7 @@ public:
         ui.show(*this);
     }
 protected:
+    //Converts confirmed tenths of a bar back to floating-point ppO2 limits.
     void apply(Ui &ui) override
     {
         dive->settings().max_ppo2_bottom = fields[0].value / 10.0f;
@@ -359,12 +404,15 @@ protected:
 };
 Ppo2EditPage ppo2Edit;
 
-//DIVE
+/*
+Routes surface decompression settings to GF, salinity and ppO2 editors.
+*/
 class DiveMenu final : public MenuPage {
 public:
     DiveMenu() { snprintf(title, sizeof(title), "DIVE"); }
 protected:
     int count() const override { return 3; }
+    //Formats current gradient factors, water type or ppO2 limits beside each menu name.
     void label(int i, char *buf, size_t len) const override
     {
         const DecoSettings &s = dive->settings();
@@ -383,6 +431,7 @@ protected:
         }
         }
     }
+    //Pushes the requested decompression-setting editor.
     void select(Ui &ui, int i) override
     {
         if (i == 0) gfEdit.open(ui);
@@ -392,9 +441,12 @@ protected:
 };
 DiveMenu diveMenu;
 
-//SYSTEM > CLOCK (UTC, no time zone)
+/*
+Stages a UTC calendar with month-aware day bounds; no timezone conversion.
+*/
 class ClockEditPage final : public EditPage {
 public:
+    //Copies the UTC RTC calendar into staged year, month, day, hour and minute fields.
     void open(Ui &ui)
     {
         snprintf(title, sizeof(title), "DATE / TIME");
@@ -413,10 +465,12 @@ public:
         ui.show(*this);
     }
 protected:
+    //Clamps the day to the selected month and year, including leap years.
     int max_for(int i) const override
     {
         return i == 2 ? days_in_month(fields[0].value, fields[1].value) : fields[i].max;
     }
+    //Commits the staged UTC calendar with seconds zero and marks time as user-confirmed.
     void apply(Ui &ui) override
     {
         struct tm t = {};
@@ -432,11 +486,14 @@ protected:
 };
 ClockEditPage clockEdit;
 
-//SYSTEM > UNITS / LANGUAGE
+/*
+Stages display units or language and applies the selected enum only on confirmation.
+*/
 class ChoiceEditPage final : public EditPage {
 public:
     enum Kind { Units, Language };
 
+    //Stages the current units or language enum as a zero-based named choice.
     void open(Ui &ui, Kind k)
     {
         kind = k;
@@ -451,6 +508,7 @@ public:
         ui.show(*this);
     }
 protected:
+    //Commits the confirmed display choice and returns to the system menu.
     void apply(Ui &ui) override
     {
         if (kind == Units) configComputer.set_system_unit(static_cast<unitSystem>(fields[0].value));
@@ -462,12 +520,15 @@ private:
 };
 ChoiceEditPage choiceEdit;
 
-//SYSTEM
+/*
+Routes clock, display-unit and language settings.
+*/
 class SystemMenu final : public MenuPage {
 public:
     SystemMenu() { snprintf(title, sizeof(title), "SYSTEM"); }
 protected:
     int count() const override { return 3; }
+    //Shows UTC clock status or the selected units/language as a right-aligned value.
     void label(int i, char *buf, size_t len) const override
     {
         switch (i) {
@@ -489,6 +550,7 @@ protected:
             break;
         }
     }
+    //Opens the corresponding clock, units or language editor.
     void select(Ui &ui, int i) override
     {
         if (i == 0) clockEdit.open(ui);
@@ -498,17 +560,21 @@ protected:
 };
 SystemMenu systemMenu;
 
-//MENU (only MIX during a dive)
+/*
+Root menu restricting navigation to gas selection while a dive is active.
+*/
 class RootMenu final : public MenuPage {
 public:
     RootMenu() { snprintf(title, sizeof(title), "MENU"); }
 protected:
     int count() const override { return dive->in_dive() ? 1 : 3; }
+    //Writes the selected root item name; live dives expose only MIX.
     void label(int i, char *buf, size_t len) const override
     {
         static const char *const NAMES[] = {"MIX", "DIVE", "SYSTEM"};
         snprintf(buf, len, "%s", NAMES[i]);
     }
+    //Pushes the selected gas, dive-setting or system submenu.
     void select(Ui &ui, int i) override
     {
         if (i == 0) ui.show(mixList);
@@ -518,8 +584,9 @@ protected:
 };
 RootMenu rootMenu;
 
-} // namespace
+} //Anonymous namespace.
 
+//Binds the shared static page collection to the supplied live controller.
 MenuSystem::MenuSystem(DiveController &dive_controller)
 {
     dive = &dive_controller;

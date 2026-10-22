@@ -1,9 +1,13 @@
+/*
+Pressure-sample integration, dive detection and tissue persistence.
+Connects gas selection and decompression settings to the tissue model.
+*/
 #include "configComputer.h"
 #include "diveController.h"
 
 namespace {
-const float DIVE_START_M = 1.2f;
-const float DIVE_END_M = 0.8f;
+const float DIVE_START_M = 1.2f; //Dive starts strictly deeper than 1.2 metres.
+const float DIVE_END_M = 0.8f; //Dive ends after 60 seconds continuously shallower than 0.8 metres.
 }
 
 DiveController::DiveController(BuhlmannModel &model, TissueStore &store)
@@ -16,8 +20,14 @@ DiveController::DiveController(BuhlmannModel &model, TissueStore &store)
     plan_.tts_min = 0;
 }
 
+//Restores saved loading and integrates elapsed surface time on air before resuming samples.
 void DiveController::begin(float p_surface, time_t now)
 {
+    //Every 10m of water, add 1 bar, so 10.0f converts bar per 10 metres into bar per metre
+    /*pressure = density × gravity × depth
+    fresh: 1000 kg/m³ × 9.81 × 10 m = 98 100 Pa ≈ 0.98 bar
+    salt:  1025 kg/m³ × 9.81 × 10 m = 100 550 Pa ≈ 1.006 b
+    */
     settings_.bar_per_m = configComputer.get_hydrostatic_pressure() / 10.0f;
     model_.reset_to_surface(p_surface);
 
@@ -27,15 +37,17 @@ void DiveController::begin(float p_surface, time_t now)
     if (!store_.load(saved, anchor, saved_at)) return;
 
     const double elapsed = difftime(now, saved_at);
-    if (elapsed >= MAX_OFFGAS_S) return; // fully desaturated
+    if (elapsed >= MAX_OFFGAS_S) return; //Treats records at least 14 days old as surface-saturated.
     model_.tissues = saved;
     model_.set_gf_anchor(anchor);
     //Unknown or negative elapsed time (clock not kept): keep tissues as saved, conservative.
+    //For positive elapsed time under 14 days, off-gasses on air at surface pressure.
     if (elapsed > 0) model_.update(p_surface, p_surface, (float) elapsed, GAS_AIR);
-    //A saved anchor means the computer restarted during a dive, that mean a big big issue
+    //A saved anchor indicates a potentially serious restart during an unfinished dive.
     in_dive_ = anchor > 0.0f;
 }
 
+//Starts a fresh dive interval without discarding residual tissue loading.
 void DiveController::start_dive()
 {
     in_dive_ = true;
@@ -45,6 +57,7 @@ void DiveController::start_dive()
     model_.reset_anchor();
 }
 
+//Clears the GF anchor, restores bottom-gas selection and immediately persists tissues.
 void DiveController::end_dive(time_t now)
 {
     in_dive_ = false;
@@ -53,12 +66,14 @@ void DiveController::end_dive(time_t now)
     save(last_tick_, now);
 }
 
+//Records the save tick and attempts SD persistence; failure is not propagated.
 void DiveController::save(uint32_t tick_ms, time_t now)
 {
     last_save_ = tick_ms;
     store_.save(model_.tissues, model_.gf_anchor(), now);
 }
 
+//Integrates between pressure samples using unsigned tick differences, then refreshes dive metrics.
 void DiveController::sample(float p_amb, uint32_t tick_ms, time_t now)
 {
     if (!have_last_) {
@@ -70,6 +85,7 @@ void DiveController::sample(float p_amb, uint32_t tick_ms, time_t now)
 
         if (in_dive_) {
             dive_ms_ += dt_ms;
+            //Accumulates time using the preceding sample depth; deeper samples reset the shallow timer.
             shallow_ms_ = depth_m_ < DIVE_END_M ? shallow_ms_ + dt_ms : 0;
         }
     }
@@ -79,6 +95,7 @@ void DiveController::sample(float p_amb, uint32_t tick_ms, time_t now)
     depth_m_ = (p_amb - model_.surface_pressure()) / settings_.bar_per_m;
     if (depth_m_ < 0.0f) depth_m_ = 0.0f;
 
+    //Starts only beyond 1.2 m; hysteresis ends the dive after 60 s below 0.8 m.
     if (!in_dive_ && depth_m_ > DIVE_START_M) start_dive();
     if (in_dive_) {
         if (depth_m_ > max_depth_m_) max_depth_m_ = depth_m_;
@@ -99,5 +116,6 @@ void DiveController::sample(float p_amb, uint32_t tick_ms, time_t now)
         plan_.tts_min = 0;
     }
 
+    //Saves every 60 seconds, also allowing unsigned HAL tick wraparound.
     if (tick_ms - last_save_ >= SAVE_PERIOD_MS) save(tick_ms, now);
 }
